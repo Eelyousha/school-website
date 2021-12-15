@@ -8,12 +8,17 @@ from django.contrib.contenttypes.models import ContentType
 from django.contrib.auth.mixins import PermissionRequiredMixin
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.contrib.auth.models import User
+from django import template
+from django.http import HttpResponseRedirect
+from django.views.decorators.csrf import csrf_exempt
 
 
+@csrf_exempt
 def index(request):
     return render(request, 'NIR_UD/index.html')
 
 
+@csrf_exempt
 def about(request):
     return render(request, 'NIR_UD/about.html')
 
@@ -84,7 +89,6 @@ teachers_group.permissions.add(add_hw_permission, view_hw_permission, delete_hw_
                                change_hw_permission)
 teachers_group.permissions.add(view_acsub_permission, view_cl_permission, view_st_permission, change_st_permission,
                                view_t_permission, view_as_permission)
-
 
 # Создание пользователя группы "ученики"
 # student_1 = User.objects.create_user('iov14032008', '12345678')
