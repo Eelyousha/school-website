@@ -133,7 +133,7 @@ class AverageScore(models.Model):
 
 # 7 Таблица успеваемости
 class AcademicPerformance(models.Model):
-    lesson_date = models.DateField()  # Дата урока (в формате SQLite)
+    lesson_date = models.DateField(auto_now=True)  # Дата урока (в формате SQLite)
     is_appeared = models.BooleanField()  # Индикатор присутствия на уроке (есть/нет)
     student_mark = models.DecimalField(max_digits=MARK_LEN, decimal_places=MARK_LEN)  # Оценка за урок (2-5)
     student_id = models.ForeignKey(Students,

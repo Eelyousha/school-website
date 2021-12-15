@@ -32,6 +32,60 @@ def analytic(request):
 
 
 @csrf_exempt
+# def academic_performance(request):
+#     marks = AcademicPerformance.objects.all()
+#     # for mark in marks:
+#     #     mark.lesson_date = datetime.datetime.fromtimestamp(mark.lesson_date / 1e3)
+#
+#     return render(request, 'NIR_UD/AcademicPerfomance.html', {'marks': marks})
+
+
+def classestest(request):
+    classes = Classes.objects.all()
+    return render(request, 'NIR_UD/AcademicPerfomance.html', {'classes': classes})
+
+
+@csrf_exempt
+def academic_subjects(request):
+    return render(request, 'NIR_UD/AcademicSubjects.html')
+
+
+@csrf_exempt
+def average_score(request):
+    return render(request, 'NIR_UD/AverageScore.html')
+
+
+@csrf_exempt
+def classes(request):
+    return render(request, 'NIR_UD/Classes.html')
+
+
+@csrf_exempt
+def lecture_halls(request):
+    return render(request, 'NIR_UD/LectureHalls.html')
+
+
+@csrf_exempt
+def teachers(request):
+    return render(request, 'NIR_UD/Teachers.html')
+
+
+@csrf_exempt
+def timetable(request):
+    return render(request, 'NIR_UD/Timetable.html')
+
+
+@csrf_exempt
+def homework(request):
+    return render(request, 'NIR_UD/Homework.html')
+
+
+@csrf_exempt
+def students(request):
+    return render(request, 'NIR_UD/Students.html')
+
+
+@csrf_exempt
 def auth(request):
     c = {}
     if request.method == 'POST':
