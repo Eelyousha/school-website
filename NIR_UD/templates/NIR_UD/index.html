@@ -29,19 +29,18 @@
 <body class="text-center">
 <main class="form-signin">
     <img class="logo" src="../../../src/static/img/logo.svg" alt="" width="524" height="78">
-  <form>
-    <div class="form-floating">
-      <input type="email" class="form-control" id="floatingInput" placeholder="name@example.com">
-      <label for="floatingInput">Логин</label>
-    </div>
-    <div class="form-floating">
-      <input type="password" class="form-control" id="floatingPassword" placeholder="Password">
-      <label for="floatingPassword">Пароль</label>
-    </div>
-
-    <button class="btn" type="login">Войти</button>
-      <p class="reg">Ещё нет аккаунта? <a href="/">Зарегистрироваться</a></p>
-  </form>
+    <form action="/NIR_UD/" method="post">{% csrf_token %}
+        <div class="form-floating">
+            <input type="login" class="form-control" id="floatingInput" placeholder="login" name="username">
+            <label for="floatingInput">Логин</label>
+        </div>
+        <div class="form-floating">
+            <input type="password" class="form-control" id="floatingPassword" placeholder="password" name="password">
+            <label for="floatingPassword">Пароль</label>
+        </div>
+        <button class="btn" type="submit">Войти</button>
+        <p class="reg">Ещё нет аккаунта? <a href="/">Зарегистрироваться</a></p>
+    </form>
 </main>
 </body>
 </html>

@@ -1,8 +1,12 @@
-from django.shortcuts import render
+from django.views.decorators.csrf import csrf_protect
+from django.shortcuts import render, redirect
 from django.http import HttpResponse
+from django.contrib.auth.views import LoginView
+from django.contrib.auth import authenticate, login
 from django.contrib.auth.models import Group, Permission
 from django.contrib.contenttypes.models import ContentType
 from django.contrib.auth.mixins import PermissionRequiredMixin
+from django.contrib.auth.mixins import LoginRequiredMixin
 from django.contrib.auth.models import User
 
 
@@ -12,6 +16,31 @@ def index(request):
 
 def about(request):
     return render(request, 'NIR_UD/about.html')
+
+
+@csrf_exempt
+def admin(request):
+    return render(request, 'NIR_UD/admin_tables.html')
+
+
+@csrf_exempt
+def auth(request):
+    c = {}
+    if request.method == 'POST':
+        username = request.POST.get('username')
+        password = request.POST.get('password')
+    user = authenticate(request, username=username, password=password)
+    if user is not None:
+        login(request, user)
+        if user.groups.filter(name=students_group):
+            return render(request, 'NIR_UD/students_tables.html', c)
+        elif user.groups.filter(name=teachers_group):
+            return render(request, 'NIR_UD/teacher_tables.html', c)
+        else:
+            return render(request, 'NIR_UD/admin_tables.html', c)
+        # Redirect to a success page.
+    else:
+        return HttpResponseRedirect('404')
 
 
 # Права доступа к таблице средних баллов
@@ -58,9 +87,9 @@ teachers_group.permissions.add(view_acsub_permission, view_cl_permission, view_s
 
 
 # Создание пользователя группы "ученики"
-student_1 = User.objects.create_user('iov14032008', '12345678')
-students_group.user_set.add(student_1)
+# student_1 = User.objects.create_user('iov14032008', '12345678')
+# students_group.user_set.add(student_1)
 
 # Создание пользователя группы "учителя"
-teacher_1 = User.objects.create_user('isv05071964', '12345678')
-teachers_group.user_set.add(teacher_1)
+# teacher_1 = User.objects.create_user('isv05071964', '12345678')
+# teachers_group.user_set.add(teacher_1)
