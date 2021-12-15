@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <title>Успеваемость</title>
+    <link rel="stylesheet" href="../../../src/static/css/base.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Raleway:wght@400;600&family=Roboto:wght@300&display=swap"
+          rel="stylesheet">
+</head>
+<body>
+<div class="parent">
+    <div class="head">
+        <h1>Успеваемость</h1>
+    </div>
+    <hr>
+    <table>
+        <thead>
+        <tr>
+            <th>Дата урока</th>
+            <th>Присутствие</th>
+            <th>Оценка</th>
+            <th>Ученик</th>
+        </tr>
+        </thead>
+        <tbody>
+        {% for c in classes %}
+        <tr class="success">
+            <td>{{ c.class_id }}</td>
+            <td>{{ c.teacher_id }}</td>
+            <td>{{ c.number_of_students }}</td>
+            <td>{{ c.training_profile }}</td>
+        </tr>
+        {%  endfor %}
+        </tbody>
+    </table>
+</div>
+</body>
+</html>

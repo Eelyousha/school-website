@@ -11,6 +11,9 @@ from django.contrib.auth.models import User
 from django import template
 from django.http import HttpResponseRedirect
 from django.views.decorators.csrf import csrf_exempt
+from django.views.generic import ListView
+from .models import Classes
+import datetime
 
 
 @csrf_exempt
@@ -24,8 +27,8 @@ def about(request):
 
 
 @csrf_exempt
-def admin(request):
-    return render(request, 'NIR_UD/admin_tables.html')
+def analytic(request):
+    return render(request, 'NIR_UD/Analytic.html')
 
 
 @csrf_exempt
@@ -46,6 +49,12 @@ def auth(request):
         # Redirect to a success page.
     else:
         return HttpResponseRedirect('404')
+
+
+# class AcademicPerfomanceView(ListView):
+#     model = AcademicPerformance
+#     template_name = './NIR_UD/AcademicPerfomance.html'
+#     context_object_name = 'marks'
 
 
 # Права доступа к таблице средних баллов
