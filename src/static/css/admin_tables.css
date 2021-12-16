@@ -21,7 +21,8 @@ body {
 .row3 {
     margin-left: 10%;
     position:absolute;
-    bottom: 150px;
+    right: 20px;
+    top: 43px;
 }
 
 h1 {

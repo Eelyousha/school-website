@@ -25,6 +25,8 @@ MARK_LEN = 1
 
 TIMETABLE_DAY_OF_WEEK_LEN = 20
 
+ACADEMIC_PERFOMANCE_DATE_LEN = 10
+
 
 # 1 Таблица учителей
 class Teachers(models.Model):
@@ -133,9 +135,9 @@ class AverageScore(models.Model):
 
 # 7 Таблица успеваемости
 class AcademicPerformance(models.Model):
-    lesson_date = models.DateField(auto_now=True)  # Дата урока (в формате SQLite)
+    lesson_date = models.CharField(max_length=ACADEMIC_PERFOMANCE_DATE_LEN)  # Дата урока (в формате SQLite)
     is_appeared = models.BooleanField()  # Индикатор присутствия на уроке (есть/нет)
-    student_mark = models.DecimalField(max_digits=MARK_LEN, decimal_places=MARK_LEN)  # Оценка за урок (2-5)
+    student_mark = models.IntegerField(max_length=MARK_LEN)  # Оценка за урок (2-5)
     student_id = models.ForeignKey(Students,
                                    on_delete=models.CASCADE)  # ID студента, который связан первичным ключом с таблицей учеников. При удалении корневого объекта удалится и данный экземпляр.
     class_id = models.ForeignKey(Classes,
@@ -172,7 +174,7 @@ class Timetable(models.Model):
 
 # 9 Домашние задания
 class HomeWork(models.Model):
-    deadline = models.DateField()  # Дата сдачи домашнего задания
+    deadline = models.CharField(max_length=ACADEMIC_PERFOMANCE_DATE_LEN)  # Дата сдачи домашнего задания
     subject_id = models.ForeignKey(AcademicSubjects,
                                    on_delete=models.CASCADE)  # ID учебного предмета, который связан первичным ключом с таблицей учебных предметов. При удалении корневого объекта (предмета) удалится и данный экземпляр (запись о среднем балле).
     homework_text = models.TextField()  # Текст домашнего задания для ученика.

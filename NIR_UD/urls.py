@@ -6,7 +6,7 @@ urlpatterns = [
     re_path('^NIR_UD/$', views.auth, name='namespace'),
     path('', views.index),
     re_path('Analytic.html', views.analytic, name='analytics'),
-    re_path('AcademicPerfomance.html', views.classestest),
+    re_path('AcademicPerfomance.html', views.academic_performance),
     re_path('AcademicSubjects.html', views.academic_subjects),
     re_path('AverageScore.html', views.average_score),
     re_path('Classes.html', views.classes),

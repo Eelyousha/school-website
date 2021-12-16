@@ -25,16 +25,26 @@
         </tr>
         </thead>
         <tbody>
-        {% for c in classes %}
+        {% for el in marks %}
         <tr class="success">
-            <td>{{ c.class_id }}</td>
-            <td>{{ c.teacher_id }}</td>
-            <td>{{ c.number_of_students }}</td>
-            <td>{{ c.training_profile }}</td>
+            <td><input name="radio-value" type="radio" id="radioButton"></td>
+            <td>{{ el.lesson_date }}</td>
+            <td>{{ el.is_appeared }}</td>
+            <td>{{ el.student_mark }}</td>
+            <td>{{ el.student_id_id }}</td>
+            <td>{{ el.class_id }}</td>
+            <td>{{ el.subject_id }}</td>
         </tr>
         {%  endfor %}
         </tbody>
     </table>
+<div class="row3">
+    <button class="edit" type="submit">Редактировать</button>
+    <button class="add">Добавить оценку</button>
+    <button class="delete">Удалить оценку</button>
+    <button class="search">Поиск</button>
+
+</div>
 </div>
 </body>
 </html>

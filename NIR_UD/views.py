@@ -12,7 +12,7 @@ from django import template
 from django.http import HttpResponseRedirect
 from django.views.decorators.csrf import csrf_exempt
 from django.views.generic import ListView
-from .models import Classes
+from .models import Classes, AcademicPerformance
 import datetime
 
 
@@ -32,17 +32,16 @@ def analytic(request):
 
 
 @csrf_exempt
-# def academic_performance(request):
-#     marks = AcademicPerformance.objects.all()
-#     # for mark in marks:
-#     #     mark.lesson_date = datetime.datetime.fromtimestamp(mark.lesson_date / 1e3)
-#
-#     return render(request, 'NIR_UD/AcademicPerfomance.html', {'marks': marks})
+def academic_performance(request):
+    marks = AcademicPerformance.objects.all()
+    # for mark in marks:
+    #     mark.lesson_date = datetime.datetime.fromtimestamp(mark.lesson_date / 1e3)
+    return render(request, 'NIR_UD/AcademicPerfomance.html', {'marks': marks})
 
 
-def classestest(request):
-    classes = Classes.objects.all()
-    return render(request, 'NIR_UD/AcademicPerfomance.html', {'classes': classes})
+# def classestest(request):
+#     classes = Classes.objects.all()
+#     return render(request, 'NIR_UD/AcademicPerfomance.html', {'classes': classes})
 
 
 @csrf_exempt
