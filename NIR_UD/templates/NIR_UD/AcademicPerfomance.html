@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <title>Успеваемость</title>
+    <link rel="stylesheet" href="../../../src/static/css/base.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Raleway:wght@400;600&family=Roboto:wght@300&display=swap"
+          rel="stylesheet">
+</head>
+<body>
+<div class="parent">
+    <div class="head">
+        <h1>Успеваемость</h1>
+    </div>
+    <hr>
+    <table>
+        <thead>
+        <tr>
+            <th>Дата урока</th>
+            <th>Присутствие</th>
+            <th>Оценка</th>
+            <th>Ученик</th>
+        </tr>
+        </thead>
+        <tbody>
+        {% for el in marks %}
+        <tr class="success">
+            <td><input name="radio-value" type="radio" id="radioButton"></td>
+            <td>{{ el.lesson_date }}</td>
+            <td>{{ el.is_appeared }}</td>
+            <td>{{ el.student_mark }}</td>
+            <td>{{ el.student_id_id }}</td>
+            <td>{{ el.class_id }}</td>
+            <td>{{ el.subject_id }}</td>
+        </tr>
+        {%  endfor %}
+        </tbody>
+    </table>
+<div class="row3">
+    <button class="edit" type="submit">Редактировать</button>
+    <button class="add">Добавить оценку</button>
+    <button class="delete">Удалить оценку</button>
+    <button class="search">Поиск</button>
+
+</div>
+</div>
+</body>
+</html>

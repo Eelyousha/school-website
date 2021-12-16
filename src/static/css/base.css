@@ -1,0 +1,61 @@
+body {
+    background-color: #FAFAFA;
+    font-family: 'Raleway', sans-serif;
+}
+
+.row3 {
+    margin-left: 10%;
+    position:absolute;
+    right: 20px;
+    top: 28px;
+}
+
+
+.row3 button {
+    font-family: 'Raleway', sans-serif;
+    width: 130px;
+    height: 40px;
+    -webkit-appearance: none;
+    border-radius: 8px;
+    border: none;
+    color: white;
+    font-weight: 600;
+    cursor: pointer;
+}
+
+h1 {
+    font-family: 'Raleway', sans-serif;
+    color: #4A4A4A;
+    margin-top: 30px;
+    margin-bottom: 30px;
+    margin-left: 10px;
+}
+
+hr {
+    border: none;
+    color: #1088C1;
+    height: 1px;
+    background-color: #1088C1;
+    margin: 0;
+}
+
+.add {
+    margin-right: 6px;
+    background: #1088C1;
+}
+
+.edit {
+    margin-right: 6px;
+    background: #c4c4c4;
+    position: relative;
+    display: inline-block;
+}
+
+.delete {
+    margin-right: 6px;
+    background: #1088C1;
+}
+
+.search {
+    background: #1088C1;
+}
