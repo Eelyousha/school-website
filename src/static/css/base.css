@@ -154,6 +154,12 @@ th:nth-child(7) {
     text-align: right;
 }
 
+th:nth-child(8) {
+    padding-right: 20px;
+    text-align: right;
+}
+
+
 .success td {
     margin-top:1px;
     font-size: 14px;
