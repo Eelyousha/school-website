@@ -6,15 +6,14 @@
     <link rel="stylesheet" href="../../../src/static/css/base.css">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Raleway:wght@400;600&family=Roboto:wght@300&display=swap"
-          rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
 </head>
 <body>
 <div class="parent">
-    <div class="head">
-        <h2>Успеваемость</h2>
-    </div>
     <div class="container">
+        <div class="head">
+        <p>Успеваемость</p>
+    </div>
         <table id="mytable">
             <thead>
             <tr>
@@ -32,7 +31,9 @@
                 <form method="post">{% csrf_token %}
                     <tr class="success">
                         <td>{{ el.lesson_date }}</td>
-                        <td>{{ el.is_appeared }}</td>
+                        <td>
+                            <button class="o">{{ el.is_appeared }}</button>
+                        </td>
                         <td>
                             <button class="i">{{ el.student_mark }}</button>
                         </td>
@@ -53,51 +54,45 @@
             </tbody>
         </table>
     </div>
-    <div class="row3">
-        <button class="edit" type="submit">Редактировать</button>
-        <button class="add">Добавить оценку</button>
-        <button class="delete">Удалить оценку</button>
-        <button class="search">Поиск</button>
-    </div>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
-    <script>$('#mytable tr td .i').each(function () {
+    <script>$('#mytable tr td button.i').each(function () {
         var cellValue = $(this).html();
         if (!isNaN(parseFloat(cellValue))) {
             if (cellValue == 2) {
-                $(this).css('font-family', 'Raleway');
-                $(this).css('font-weight', '600');
+                $(this).css('font-family', 'Inter');
+                $(this).css('font-weight', '500');
                 $(this).css('border', 'none');
-                $(this).css('padding', '2px 15px 6px 15px');
+                $(this).css('padding', '4px 15px 4px 15px');
                 $(this).css('background-color', '#FFE0E0');
                 $(this).css('color', '#D30000');
                 $(this).css('border-radius', '10px');
             }
 
             if (cellValue == 3) {
-                $(this).css('font-family', 'Raleway');
-                $(this).css('font-weight', '600');
+                $(this).css('font-family', 'Inter');
+                $(this).css('font-weight', '500');
                 $(this).css('border', 'none');
-                $(this).css('padding', '2px 15px 6px 15px');
+                $(this).css('padding', '4px 15px 4px 15px');
                 $(this).css('background-color', '#FFECCC');
                 $(this).css('color', '#965E00');
                 $(this).css('border-radius', '10px');
             }
 
             if (cellValue == 4) {
-                $(this).css('font-family', 'Raleway');
-                $(this).css('font-weight', '600');
+                $(this).css('font-family', 'Inter');
+                $(this).css('font-weight', '500');
                 $(this).css('border', 'none');
-                $(this).css('padding', '2px 15px 6px 15px');
+                $(this).css('padding', '4px 15px 4px 15px');
                 $(this).css('background-color', '#CDFFCD');
                 $(this).css('color', '#007F00');
                 $(this).css('border-radius', '10px');
             }
 
             if (cellValue == 5) {
-                $(this).css('font-family', 'Raleway');
-                $(this).css('font-weight', '600');
+                $(this).css('font-family', 'Inter');
+                $(this).css('font-weight', '500');
                 $(this).css('border', 'none');
-                $(this).css('padding', '2px 15px 6px 15px');
+                $(this).css('padding', '4px 15px 4px 15px');
                 $(this).css('background-color', '#CDFFCD');
                 $(this).css('color', '#007F00');
                 $(this).css('border-radius', '10px');
@@ -105,7 +100,31 @@
         }
     });
     </script>
+    <script>$('#mytable tr td button.o').each(function () {
+        var cellVal = $(this).html();
+        {
+            if (cellVal == "True") {
+                $(this).css('font-family', 'Inter');
+                $(this).css('font-weight', '500');
+                $(this).css('border', 'none');
+                $(this).css('padding', '4px 10px 4px 10px');
+                $(this).css('background-color', '#E6E6F2');
+                $(this).css('color', '#4A4AFF');
+                $(this).css('border-radius', '10px');
+            }
 
+            if (cellVal == "False") {
+                $(this).css('font-family', 'Inter');
+                $(this).css('font-weight', '500');
+                $(this).css('border', 'none');
+                $(this).css('padding', '4px 10px 4px 10px');
+                $(this).css('background-color', '#F2F0F9');
+                $(this).css('color', '#6E6893');
+                $(this).css('border-radius', '10px');
+            }
+        }
+    });
+    </script>
 </div>
 </body>
 </html>
