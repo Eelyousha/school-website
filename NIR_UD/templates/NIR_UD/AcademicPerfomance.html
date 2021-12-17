@@ -14,88 +14,98 @@
     <div class="head">
         <h2>Успеваемость</h2>
     </div>
-<div class="container">
-    <table id="mytable">
-        <thead>
-        <tr>
-            <th><input name="radio-value" type="radio" id="radioButton"></th>
-            <th>Дата урока</th>
-            <th>Присутствие</th>
-            <th>Оценка за урок</th>
-            <th>Ученик</th>
-            <th>Учебный предмет</th>
-            <th>Класс</th>
-            <th><img src="../../../src/static/img/More.svg" alt=""></th>
-        </tr>
-        </thead>
-        <tbody>
-        {% for el in marks %}
-        <tr class="success">
-            <td><input name="radio-value" type="radio" id="radioButton"></td>
-            <td>{{ el.lesson_date }}</td>
-            <td>{{ el.is_appeared }}</td>
-            <td><button class="i">{{ el.student_mark }}</button></td>
-            <td>{{ el.student_id_id }}</td>
-            <td>{{ el.subject_id_id }}</td>
-            <td>{{ el.class_id_id }}</td>
-            <td><img src="../../../src/static/img/More.svg" alt=""></td>
-        </tr>
-        {%  endfor %}
-        </tbody>
-    </table>
-</div>
-<div class="row3">
-    <button class="edit" type="submit">Редактировать</button>
-    <button class="add">Добавить оценку</button>
-    <button class="delete">Удалить оценку</button>
-    <button class="search">Поиск</button>
-</div>
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
-<script>$('#mytable tr td .i').each(function(){
-  var cellValue = $(this).html();
-  if(!isNaN(parseFloat(cellValue))) {
-    if (cellValue == 2) {
-     $(this).css('font-family', 'Raleway');
-     $(this).css('font-weight', '600');
-     $(this).css('border','none');
-     $(this).css('padding','2px 15px 6px 15px');
-     $(this).css('background-color','#FFE0E0');
-     $(this).css('color','#D30000');
-     $(this).css('border-radius','10px');
-    }
+    <div class="container">
+        <table id="mytable">
+            <thead>
+            <tr>
+                <th><input name="radio-value" type="radio" id="radioButton"></th>
+                <th>Дата урока</th>
+                <th>Присутствие</th>
+                <th>Оценка за урок</th>
+                <th>Ученик</th>
+                <th>Учебный предмет</th>
+                <th>Класс</th>
+                <th><img src="../../../src/static/img/More.svg" alt=""></th>
+            </tr>
+            </thead>
+            <tbody>
+            {% for el in marks %}
+                <tr class="success">
+                    <td><input name="radio-value" type="radio" id="radioButton"></td>
+                    <td>{{ el.lesson_date }}</td>
+                    <td>{{ el.is_appeared }}</td>
+                    <td>
+                        <button class="i">{{ el.student_mark }}</button>
+                    </td>
+                    <td>{{ el.student_id_id }}</td>
+                    <td>{{ el.subject_id_id }}</td>
+                    <td>{{ el.class_id_id }}</td>
+                    <td>
+                        <div class="dropdown"><img src="../../../src/static/img/More.svg" alt="">
+                            <div class="dropdown-content">
+                        <a href="#">aaa</a>
+                        <a href="#">bbb</a>
+                        <a href="#">ccc</a>
+                            </div>
+                        </div>
+                    </td>
+                </tr>
+            {% endfor %}
+            </tbody>
+        </table>
+    </div>
+    <div class="row3">
+        <button class="edit" type="submit">Редактировать</button>
+        <button class="add">Добавить оценку</button>
+        <button class="delete">Удалить оценку</button>
+        <button class="search">Поиск</button>
+    </div>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+    <script>$('#mytable tr td .i').each(function () {
+        var cellValue = $(this).html();
+        if (!isNaN(parseFloat(cellValue))) {
+            if (cellValue == 2) {
+                $(this).css('font-family', 'Raleway');
+                $(this).css('font-weight', '600');
+                $(this).css('border', 'none');
+                $(this).css('padding', '2px 15px 6px 15px');
+                $(this).css('background-color', '#FFE0E0');
+                $(this).css('color', '#D30000');
+                $(this).css('border-radius', '10px');
+            }
 
-    if(cellValue==3){
-     $(this).css('font-family', 'Raleway');
-     $(this).css('font-weight', '600');
-     $(this).css('border','none');
-     $(this).css('padding','2px 15px 6px 15px');
-     $(this).css('background-color','#FFECCC');
-     $(this).css('color','#965E00');
-     $(this).css('border-radius','10px');
-     }
+            if (cellValue == 3) {
+                $(this).css('font-family', 'Raleway');
+                $(this).css('font-weight', '600');
+                $(this).css('border', 'none');
+                $(this).css('padding', '2px 15px 6px 15px');
+                $(this).css('background-color', '#FFECCC');
+                $(this).css('color', '#965E00');
+                $(this).css('border-radius', '10px');
+            }
 
-         if(cellValue==4){
-     $(this).css('font-family', 'Raleway');
-     $(this).css('font-weight', '600');
-     $(this).css('border','none');
-     $(this).css('padding','2px 15px 6px 15px');
-     $(this).css('background-color','#CDFFCD');
-     $(this).css('color','#007F00');
-     $(this).css('border-radius','10px');
-     }
+            if (cellValue == 4) {
+                $(this).css('font-family', 'Raleway');
+                $(this).css('font-weight', '600');
+                $(this).css('border', 'none');
+                $(this).css('padding', '2px 15px 6px 15px');
+                $(this).css('background-color', '#CDFFCD');
+                $(this).css('color', '#007F00');
+                $(this).css('border-radius', '10px');
+            }
 
-              if(cellValue==5){
-     $(this).css('font-family', 'Raleway');
-     $(this).css('font-weight', '600');
-     $(this).css('border','none');
-     $(this).css('padding','2px 15px 6px 15px');
-     $(this).css('background-color','#CDFFCD');
-     $(this).css('color','#007F00');
-     $(this).css('border-radius','10px');
-     }
-  }
-});
-</script>
+            if (cellValue == 5) {
+                $(this).css('font-family', 'Raleway');
+                $(this).css('font-weight', '600');
+                $(this).css('border', 'none');
+                $(this).css('padding', '2px 15px 6px 15px');
+                $(this).css('background-color', '#CDFFCD');
+                $(this).css('color', '#007F00');
+                $(this).css('border-radius', '10px');
+            }
+        }
+    });
+    </script>
 
 </div>
 </body>
