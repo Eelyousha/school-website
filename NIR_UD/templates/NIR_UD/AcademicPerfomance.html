@@ -2,8 +2,8 @@
 <html lang="ru">
 <head>
     <meta charset="UTF-8">
-    <title>Успеваемость</title>
-    <link rel="stylesheet" href="../../../src/static/css/base.css">
+    <title>{% block title %}Успеваемость{% endblock %}</title>
+    {% block css %}<link rel="stylesheet" href="../../../src/static/css/base.css">{% endblock %}
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
@@ -15,19 +15,20 @@
         <a href="{% url 'back' %}"><img src="../../../src/static/img/Vector.svg" alt="">Назад</a>
     </div>
         <div class="head">
-        <p>Успеваемость</p>
+        {% block name %}<p>Успеваемость</p>{% endblock %}
             <hr>
     </div>
         <div class="table">
-        <div class="head-table">
+        {% block head %}<div class="head-table">
             <div class="d1">
-                <form>
-                <input type="search" placeholder="Найти оценку по дате, имени ученика и т.д.">
-                <button type="submit"><img src="../../../src/static/img/Search.svg" alt=""></button>
+                <form action="{% url 'search_results' %}" method="get">
+                {% block search %}<input name='q' type="text" placeholder="Найти оценку по дате, имени ученика и т.д.">
+                <button type="submit"><img src="../../../src/static/img/Search.svg" alt=""></button>{% endblock %}
                 </form>
-                <a href="">Добавить оценку</a>
+                {% block add %}<a href="">Добавить оценку</a>{% endblock %}
             </div>
-            </div>
+            </div> {% endblock %}
+        {% block table %}
         <table id="mytable">
             <thead>
             <tr>
@@ -68,12 +69,13 @@
             {% endfor %}
             </tbody>
         </table>
+        {% endblock %}
     <div class="footer-table">
     </div>
     </div>
     </div>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
-    <script>$('#mytable tr td button.i').each(function () {
+    {% block script %}<script>$('#mytable tr td button.i').each(function () {
         var cellValue = $(this).html();
         if (!isNaN(parseFloat(cellValue))) {
             if (cellValue == 2) {
@@ -145,6 +147,7 @@
         }
     });
     </script>
+    {% endblock %}
 </div>
 </body>
 </html>
