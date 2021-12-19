@@ -6,6 +6,7 @@ urlpatterns = [
     path('about', views.about),
     path('', views.index),
     re_path('^NIR_UD/$', views.auth, name='namespace'),
+    re_path('all_tables', views.back, name='back'),
     re_path('Analytic.html', views.analytic, name='analytics'),
     re_path('AcademicPerfomance.html', views.academic_performance),
     re_path('AcademicSubjects.html', views.academic_subjects),

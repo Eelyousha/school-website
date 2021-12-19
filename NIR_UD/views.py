@@ -104,6 +104,17 @@ def auth(request):
         return HttpResponseRedirect('404')
 
 
+def back(request):
+    # username = request.user.username
+    # password = request.user.password
+    # user = authenticate(request, username=username, password=password)
+    if request.user.groups.filter(name=students_group):
+        return render(request, 'NIR_UD/students_tables.html')
+    elif request.user.groups.filter(name=teachers_group):
+        return render(request, 'NIR_UD/teacher_tables.html')
+    else:
+        return render(request, 'NIR_UD/admin_tables.html')
+
 # class AcademicPerfomanceView(ListView):
 #     model = AcademicPerformance
 #     template_name = './NIR_UD/AcademicPerfomance.html'
