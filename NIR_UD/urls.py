@@ -18,7 +18,7 @@ urlpatterns = [
     re_path('Timetable.html', views.timetable),
     re_path('Homework.html', views.homework),
     re_path('Students.html', views.students),
-    path('all_shit/<str:ap>/<member_id>/', all_shit, name='all_shit/'),
+    path('ap/<operation>/<member_id>', all_shit, name="ap"),
     path('search/', AcademicPerfomance_SearchResultsView.as_view(), name='search_results'),
 ]
 
