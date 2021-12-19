@@ -1,4 +1,5 @@
-from django.shortcuts import render
+from django.http import HttpResponseRedirect
+from django.shortcuts import render, redirect
 from django.views.decorators.csrf import csrf_exempt
 
 from ..models import AcademicPerformance
@@ -28,11 +29,9 @@ def edit_member(request, member_id):
 
 @csrf_exempt
 def delete_record(request, member_id):
-    print(request.POST)
     record = AcademicPerformance.objects.get(id=member_id)
     if record is not None:
         record.delete()
-    # else:
 
     return record
 
@@ -67,14 +66,13 @@ def change_record(request, member_id):
 
 
 @csrf_exempt
-def all_shit(request, ap, member_id):
+def all_shit(request, operation, member_id):
     print(request.GET)
-    record = {}
     if request.method == "GET":
-        if ap == "out":
-            record = view_table(request, member_id)
-        elif ap == "delete":
-            record = delete_record(request, member_id)
-        elif ap == "change":
-            record = change_record(request, member_id)
-    return render(request, '../templates/NIR_UD/AcademicPerfomance.html', record)
+        if operation == "out":
+            view_table(request, member_id)
+        elif operation == "delete":
+            delete_record(request, member_id)
+        elif operation == "change":
+            change_record(request, member_id)
+    return redirect('academic_performance')

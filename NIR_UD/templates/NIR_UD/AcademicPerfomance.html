@@ -57,9 +57,9 @@
                         <td>
                             <div class="dropdown"><img src="../../../src/static/img/More.svg" alt="">
                                 <div class="dropdown-content">
-                                    <a href="{% url "all_shit/" ap="change" member_id="{{ el.id }}"%}">Изменить</a>
+                                    <a href="{% url 'ap' operation="change" member_id=el.id %}">Изменить</a>
                                     <hr>
-                                    <a href="{% url "all_shit/" ap="delete" member_id="{{ el.id }}"%}">Удалить</a>
+                                    <a href="{% url 'ap' operation="delete" member_id=el.id %}">Удалить</a>
                                 </div>
                             </div>
                         </td>

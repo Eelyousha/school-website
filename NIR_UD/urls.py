@@ -8,7 +8,7 @@ urlpatterns = [
     re_path('^NIR_UD/$', views.auth, name='namespace'),
     re_path('all_tables', views.back, name='back'),
     re_path('Analytic.html', views.analytic, name='analytics'),
-    re_path('AcademicPerfomance.html', views.academic_performance),
+    re_path('AcademicPerfomance.html', views.academic_performance, name='academic_performance'),
     re_path('AcademicSubjects.html', views.academic_subjects),
     re_path('AverageScore.html', views.average_score),
     re_path('Classes.html', views.classes),
@@ -17,6 +17,5 @@ urlpatterns = [
     re_path('Timetable.html', views.timetable),
     re_path('Homework.html', views.homework),
     re_path('Students.html', views.students),
-    path('all_shit/<str:ap>/<member_id>/', all_shit, name='all_shit/'),
+    path('ap/<operation>/<member_id>', all_shit, name="ap"),
 ]
-
