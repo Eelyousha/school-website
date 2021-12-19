@@ -1,6 +1,7 @@
 from django.urls import path, include, re_path
 from . import views
 from .db_requests.academic_performance_requests import all_shit
+from .views import AcademicPerfomance_SearchResultsView
 
 urlpatterns = [
     path('about', views.about),
