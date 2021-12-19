@@ -62,8 +62,8 @@ body {
 
 .d1 form button {
     position: absolute;
-    top: 1px;
-    left: 332px;
+    top: 2px;
+    left: 342px;
     width: 40px;
     height: 40px;
     background-color: transparent;
@@ -167,7 +167,7 @@ th:nth-child(4) {
 th:nth-child(5) {
     color: #6E6893;
     letter-spacing: 0.05em;
-    width: 330px;
+    width: 331px;
     padding-left: 54px;
     text-transform: uppercase;
     text-align: left;

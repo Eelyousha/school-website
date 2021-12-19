@@ -14,6 +14,7 @@ from django.views.decorators.csrf import csrf_exempt
 from django.views.generic import ListView
 from .models import Classes, AcademicPerformance
 import datetime
+from django.db.models import Q
 
 
 @csrf_exempt
@@ -105,9 +106,6 @@ def auth(request):
 
 
 def back(request):
-    # username = request.user.username
-    # password = request.user.password
-    # user = authenticate(request, username=username, password=password)
     if request.user.groups.filter(name=students_group):
         return render(request, 'NIR_UD/students_tables.html')
     elif request.user.groups.filter(name=teachers_group):
@@ -115,10 +113,25 @@ def back(request):
     else:
         return render(request, 'NIR_UD/admin_tables.html')
 
-# class AcademicPerfomanceView(ListView):
-#     model = AcademicPerformance
-#     template_name = './NIR_UD/AcademicPerfomance.html'
-#     context_object_name = 'marks'
+
+class AcademicPerfomance_SearchResultsView(ListView):
+    template_name = 'NIR_UD/search_results_acper.html'
+    model = AcademicPerformance
+
+    def get_queryset(self):  # новый
+        from pprint import pprint
+        print(self.request.GET)
+        query = self.request.GET.get('q')
+        if query.isdigit():
+            object_list = AcademicPerformance.objects.filter(
+                Q(student_mark=int(query))
+            )
+        else:
+            object_list = AcademicPerformance.objects.filter(
+                Q(lesson_date__icontains=query) | Q(student_id__name__icontains=query) | Q(class_id__class_id__icontains=query) | Q(subject_id__name__startswith=query)
+            )
+
+        return object_list
 
 
 # Права доступа к таблице средних баллов
