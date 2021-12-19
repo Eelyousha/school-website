@@ -32,7 +32,7 @@ ACADEMIC_PERFOMANCE_DATE_LEN = 10
 class Teachers(models.Model):
     teacher_id = models.CharField(max_length=TEACHER_ID_LEN)  # ФИО + год рождения
     name = models.CharField(max_length=TEACHER_NAME_LEN)  # ФИО
-    phone_number = models.DecimalField(max_digits=PHONE_NUMBER_LEN, decimal_places=PHONE_NUMBER_LEN)  # Номер телефона
+    phone_number = models.CharField(max_length=PHONE_NUMBER_LEN)  # Номер телефона
     qualification = models.CharField(
         max_length=TEACHER_QUALIFICATION_LEN)  # Квалификационная категория (высшая, первая, вторая)
     study_load = models.IntegerField()  # Учебная нагрузка (в часах)
@@ -51,8 +51,7 @@ class LectureHalls(models.Model):
         max_length=LECTURE_HALL_ID_LEN)  # Название кабинета (строка, тк может быть 123абв)
     name = models.CharField(
         max_length=LECTURE_HALL_NAME_LEN)  # Название проводимого предмета (аля "английский" или "спортзал"
-    lesson_index_number = models.DecimalField(max_digits=LESSON_AMOUNT_LEN,
-                                              decimal_places=LESSON_AMOUNT_LEN)  # Порядковый номер проводимого урока
+    lesson_index_number = models.IntegerField(max_length=LESSON_AMOUNT_LEN)  # Порядковый номер проводимого урока
     day_of_the_week = models.CharField(max_length=LECTURE_HALL_DOTW)
     is_busy = models.BooleanField()  # Занят ли кабинет в данный день и данный урок
 
@@ -99,11 +98,9 @@ class Students(models.Model):
     name = models.CharField(max_length=STUDENT_NAME_LEN)  # Имя ученика
     class_id = models.ForeignKey(Classes,
                                  on_delete=models.CASCADE)  # ID класса, который связан первичным ключом с таблицей классов. При удалении корневого объекта (класса) данный экземпляр обнулится.
-    phone_number = models.DecimalField(max_digits=PHONE_NUMBER_LEN,
-                                       decimal_places=PHONE_NUMBER_LEN)  # Телефонный номер ученика
+    phone_number = models.CharField(max_length=PHONE_NUMBER_LEN)  # Телефонный номер ученика
     parent_name = models.CharField(max_length=STUDENT_PRENT_NAME_LEN)  # Имя родителей
-    parent_phone_number = models.DecimalField(max_digits=PHONE_NUMBER_LEN,
-                                              decimal_places=PHONE_NUMBER_LEN)  # Телефонный номер родителей
+    parent_phone_number = models.CharField(max_length=PHONE_NUMBER_LEN)  # Телефонный номер родителей
     address = models.TextField()  # Адрес проживания
 
     def __str__(self):

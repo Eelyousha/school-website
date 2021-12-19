@@ -11,9 +11,23 @@
 <body>
 <div class="parent">
     <div class="container">
+    <div class="back">
+        <a href=""><img src="../../../src/static/img/Vector.svg" alt="">Назад</a>
+    </div>
         <div class="head">
         <p>Успеваемость</p>
+            <hr>
     </div>
+        <div class="table">
+        <div class="head-table">
+            <div class="d1">
+                <form>
+                <input type="search" placeholder="Найти оценку по дате, имени ученика и т.д.">
+                <button type="submit"><img src="../../../src/static/img/Search.svg" alt=""></button>
+                </form>
+                <a href="">Добавить оценку</a>
+            </div>
+            </div>
         <table id="mytable">
             <thead>
             <tr>
@@ -37,14 +51,15 @@
                         <td>
                             <button class="i">{{ el.student_mark }}</button>
                         </td>
-                        <td>{{ el.student_id_id }}</td>
-                        <td>{{ el.subject_id_id }}</td>
-                        <td>{{ el.class_id_id }}</td>
+                        <td>{{ el.student_id.name }}</td>
+                        <td>{{ el.subject_id.name }}</td>
+                        <td>{{ el.class_id.class_id }}</td>
                         <td>
                             <div class="dropdown"><img src="../../../src/static/img/More.svg" alt="">
                                 <div class="dropdown-content">
-                                    <a href="{% url "all_shit/" ap="delete" member_id="{{ el.id }}"%}">Удалить</a>
                                     <a href="{% url "all_shit/" ap="change" member_id="{{ el.id }}"%}">Изменить</a>
+                                    <hr>
+                                    <a href="{% url "all_shit/" ap="delete" member_id="{{ el.id }}"%}">Удалить</a>
                                 </div>
                             </div>
                         </td>
@@ -53,6 +68,9 @@
             {% endfor %}
             </tbody>
         </table>
+    <div class="footer-table">
+    </div>
+    </div>
     </div>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
     <script>$('#mytable tr td button.i').each(function () {
@@ -104,20 +122,22 @@
         var cellVal = $(this).html();
         {
             if (cellVal == "True") {
+                $(this).text("● Присутствовал");
                 $(this).css('font-family', 'Inter');
                 $(this).css('font-weight', '500');
                 $(this).css('border', 'none');
-                $(this).css('padding', '4px 10px 4px 10px');
+                $(this).css('padding', '4px 10px 4px 7px');
                 $(this).css('background-color', '#E6E6F2');
                 $(this).css('color', '#4A4AFF');
                 $(this).css('border-radius', '10px');
             }
 
             if (cellVal == "False") {
+                $(this).text("● Отсутствовал");
                 $(this).css('font-family', 'Inter');
                 $(this).css('font-weight', '500');
                 $(this).css('border', 'none');
-                $(this).css('padding', '4px 10px 4px 10px');
+                $(this).css('padding', '4px 10px 4px 7px');
                 $(this).css('background-color', '#F2F0F9');
                 $(this).css('color', '#6E6893');
                 $(this).css('border-radius', '10px');

@@ -1,31 +1,28 @@
 body {
     background-color: #F2F0F9;
     font-family: 'Inter', sans-serif;
+    margin: 0px;
 }
 
-.row3 {
-    margin-left: 10%;
-    position: absolute;
-    right: 20px;
-    top: 28px;
+.back {
+    margin-top: 20px;
 }
 
+.back img {
+    margin-right: 5px;
+}
 
-.row3 button {
-    font-family: 'Inter', sans-serif;
-    width: 130px;
-    height: 40px;
-    -webkit-appearance: none;
-    border-radius: 8px;
-    border: none;
-    color: white;
+.back a {
+    text-decoration: none;
+    font-size: 12px;
     font-weight: 600;
-    cursor: pointer;
+    color: #6E6893;
+    text-transform: uppercase;
 }
 
 .head {
     margin-bottom: 20px;
-    margin-top: 50px;
+    margin-top: 40px;
 }
 
 .head p {
@@ -38,41 +35,72 @@ body {
     margin: 0;
 }
 
-hr {
-    border: none;
-    color: #D9D5EC;
-    height: 1px;
-    background-color: #1088C1;
-    margin: 0;
-}
-
-.add {
-    margin-right: 6px;
-    background: #1088C1;
-}
-
-.edit {
-    margin-right: 6px;
-    background: #c4c4c4;
+.head-table {
+    border-radius: 8px 8px 0px 0px;
+    background-color: white;
+    height: 70px;
     position: relative;
-    display: inline-block;
 }
 
-.edit:after {
-    background: #1088C1;
+.head-table form {
+    position: relative;
 }
 
-.delete {
-    margin-right: 6px;
-    background: #1088C1;
+.head-table input {
+    font-family: 'Inter', sans-serif;
+    width: 352px;
+    height: 40px;
+    color: #6E6893;
+    border-radius: 6px;
+    outline: none;
+    border: none;
+    background-color: #F4F2FF;
+    margin: 15px 0px 15px 20px;
+    font-size: 12px;
+    padding-left: 10px;
 }
 
-.search {
-    background: #1088C1;
+.d1 form button {
+    position: absolute;
+    top: 1px;
+    left: 332px;
+    width: 40px;
+    height: 40px;
+    background-color: transparent;
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+    margin: 15px 0px 15px;
 }
 
-input[type="radio" i]:checked ~ .edit:after {
-    background: #1088C1;
+.d1 a {
+    position: absolute;
+    height: 15px;
+    top: 2px;
+    right: 20px;
+    background-color: #6D5BD0;
+    color: white;
+    text-decoration: none;
+    font-size: 12px;
+    text-transform: uppercase;
+    font-weight: 600;
+    padding: 10px;
+    margin: 15px 0px 15px;
+    border-radius: 6px;
+}
+
+.head hr {
+    border: none;
+    color: #C6C2DE;
+    height: 1px;
+    background-color: #C6C2DE;
+    margin-top: 11px;
+}
+
+.dropdown-content hr {
+    background-color: #F2F0F9;
+    border: none;
+    height: 1px;
 }
 
 .container {
@@ -85,12 +113,10 @@ table {
     border-collapse: collapse;
     background-color: #Ffffff;
     overflow: hidden;
-    box-shadow: 0px 0px 5px rgba(0, 0, 0, 0.2);
-    border-radius: 8px;
     width: 1100px;
 }
 
-thead tr th{
+thead tr th {
     background-color: #F4F2FF;
     border-bottom: 1px solid #D9D5EC;
     border-top: 1px solid #D9D5EC;
@@ -122,16 +148,17 @@ th:nth-child(2) {
 
 th:nth-child(3) {
     color: #6E6893;
-    width: 290px;
+    width: 310px;
     letter-spacing: 0.05em;
     text-transform: uppercase;
     text-align: left;
+    padding-left: 34px;
 }
 
 th:nth-child(4) {
     color: #6E6893;
     width: 104px;
-    padding-left: 104px;
+    padding-left: 64px;
     letter-spacing: 0.05em;
     text-transform: uppercase;
     text-align: left;
@@ -141,7 +168,7 @@ th:nth-child(5) {
     color: #6E6893;
     letter-spacing: 0.05em;
     width: 330px;
-    padding-left: 74px;
+    padding-left: 54px;
     text-transform: uppercase;
     text-align: left;
 }
@@ -149,7 +176,7 @@ th:nth-child(5) {
 th:nth-child(6) {
     color: #6E6893;
     width: 150px;
-    padding-left: 70px;
+    padding-left: 54px;
     letter-spacing: 0.05em;
     text-transform: uppercase;
     text-align: left;
@@ -158,8 +185,8 @@ th:nth-child(6) {
 th:nth-child(7) {
     color: #6E6893;
     width: 30px;
-    padding-right:20px;
-    padding-left:20px;
+    padding-right: 20px;
+    padding-left: 20px;
     padding-top: 13px;
     padding-bottom: 13px;
     letter-spacing: 0.05em;
@@ -174,7 +201,7 @@ th:nth-child(8) {
 
 
 .success td {
-    margin-top:1px;
+    margin-top: 1px;
     font-size: 14px;
     font-weight: 500;
     background-color: white;
@@ -182,54 +209,85 @@ th:nth-child(8) {
     border-bottom: 1px solid #D9D5EC;
 }
 
-.success td:first-child{
-    color: #6E6893;
+.success td:first-child {
     padding: 20px 65px 20px 20px;
 }
 
-.success td:nth-child(4){
-    width: 104px;
-    padding-left: 104px;
+.success td:nth-child(3) {
+    padding-left: 34px;
+    text-align: center;
 }
 
-.success td:nth-child(5){
-    padding-left: 74px;
+.success td:nth-child(4) {
+    width: 450px;
+    padding-left: 64px;
+}
+
+.success td:nth-child(5) {
+    padding-left: 54px;
     width: 250px;
 }
 
-.success td:nth-child(6){
+.success td:nth-child(6) {
     width: 150px;
-    padding-left: 80px;
+    padding-left: 54px;
+    text-align: left;
 }
 
-.success td:nth-child(7){
+.success td:nth-child(7) {
     width: 150px;
     padding: 20px 20px 20px 20px;
     text-align: right;
 }
 
+.footer-table {
+    height: 45px;
+    background-color: #F4F2FF;
+    border-radius: 0px 0px 8px 8px;
+}
+
+.table {
+    box-shadow: 0px 0px 5px rgba(0, 0, 0, 0.2);
+    border-radius: 8px;
+}
+
+
 .dropdown-content {
     display: none;
     position: absolute;
-    background-color: #f1f1f1;
-    min-width: 160px;
-    box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2);
+    background-color: white;
+    min-width: 130px;
+    box-shadow: 0px 5px 15px rgba(0, 0, 0, 0.2);
     z-index: 1;
+    border-radius: 6px;
+    padding: 5px;
 }
 
 /* Links inside the dropdown */
 .dropdown-content a {
-    color: black;
-    padding: 12px 16px;
+    color: #25213B;
+    padding: 5px 5px;
     text-decoration: none;
     display: block;
+    text-align: left;
+}
+
+.dropdown-content a:nth-child(3) {
+    color: #D30000;
 }
 
 /* Change color of dropdown links on hover */
-.dropdown-content a:hover {background-color: #ddd;}
+.dropdown-content a:hover {
+    background-color: #F2F0F9;
+    border-radius: 4px;
+}
 
 /* Show the dropdown menu on hover */
-.dropdown:hover .dropdown-content {display: block;}
+.dropdown:hover .dropdown-content {
+    display: block;
+}
 
 /* Change the background color of the dropdown button when the dropdown content is shown */
-.dropdown:hover .dropdown {background-color: #3e8e41;}
+.dropdown:hover .dropdown {
+    background-color: #3e8e41;
+}
