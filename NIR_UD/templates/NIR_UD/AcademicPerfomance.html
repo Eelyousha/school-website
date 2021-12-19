@@ -43,8 +43,8 @@
                         <td>
                             <div class="dropdown"><img src="../../../src/static/img/More.svg" alt="">
                                 <div class="dropdown-content">
-                                    <input type="submit" value="Изменить" formaction="some-to-edit">
-                                    <input type="submit" value="Удалить" formaction="some-to-delete">
+                                    <a href="{% url "all_shit/" ap="delete" member_id="{{ el.id }}"%}">Удалить</a>
+                                    <a href="{% url "all_shit/" ap="change" member_id="{{ el.id }}"%}">Изменить</a>
                                 </div>
                             </div>
                         </td>

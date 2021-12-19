@@ -137,7 +137,7 @@ class AverageScore(models.Model):
 class AcademicPerformance(models.Model):
     lesson_date = models.CharField(max_length=ACADEMIC_PERFOMANCE_DATE_LEN)  # Дата урока (в формате SQLite)
     is_appeared = models.BooleanField()  # Индикатор присутствия на уроке (есть/нет)
-    student_mark = models.IntegerField(max_length=MARK_LEN)  # Оценка за урок (2-5)
+    student_mark = models.IntegerField()  # Оценка за урок (2-5)
     student_id = models.ForeignKey(Students,
                                    on_delete=models.CASCADE)  # ID студента, который связан первичным ключом с таблицей учеников. При удалении корневого объекта удалится и данный экземпляр.
     class_id = models.ForeignKey(Classes,

@@ -1,43 +1,52 @@
+from django.shortcuts import render
 from django.views.decorators.csrf import csrf_exempt
+
 from ..models import AcademicPerformance
 
 
 @csrf_exempt
 def add_record(request):
-    AcademicPerformance().objects.create(request.POST.get('lesson_date'),
-                                         request.POST.get('is_appeared'),
-                                         request.POST.get('student_mark'),
-                                         request.POST.get('student_id'),
-                                         request.POST.get('class_id'),
-                                         request.POST.get('subject_id')).save()
+    return AcademicPerformance().objects.create(request.POST.get('lesson_date'),
+                                                request.POST.get('is_appeared'),
+                                                request.POST.get('student_mark'),
+                                                request.POST.get('student_id'),
+                                                request.POST.get('class_id'),
+                                                request.POST.get('subject_id')).save()
 
 
 @csrf_exempt
-def delete_record(request):
-    record = AcademicPerformance().objects.get(request.POST.get('lesson_date'),
-                                               request.POST.get('is_appeared'),
-                                               request.POST.get('student_mark'),
-                                               request.POST.get('student_id'),
-                                               request.POST.get('class_id'),
-                                               request.POST.get('subject_id'))
+def edit_member(request, member_id):
+    member = AcademicPerformance.objects.get(member_id)
+    form = AcademicPerformance(request.POST or None, instance=member)
+
+    if request.method == 'POST':
+        form.save()
+        # do something else, like redirect to a different view
+
+    return form
+
+
+@csrf_exempt
+def delete_record(request, member_id):
+    print(request.POST)
+    record = AcademicPerformance.objects.get(id=member_id)
     if record is not None:
         record.delete()
     # else:
 
+    return record
+
 
 @csrf_exempt
-def vew_table(request):
+def view_table(request):
     all_records = AcademicPerformance().objects.all()
 
+    return all_records
+
 
 @csrf_exempt
-def change_record(request):
-    record = AcademicPerformance().objects.get(request.POST.get('lesson_date'),
-                                               request.POST.get('is_appeared'),
-                                               request.POST.get('student_mark'),
-                                               request.POST.get('student_id'),
-                                               request.POST.get('class_id'),
-                                               request.POST.get('subject_id'))
+def change_record(request, member_id):
+    record = AcademicPerformance().objects.get(member_id)
 
     record.lesson_date = request.POST.get('new_lesson_date') \
         if request.POST.get('new_lesson_date') is not None else record.lesson_date
@@ -53,3 +62,19 @@ def change_record(request):
         if request.POST.get('new_subject_id') is not None else record.subject_id
 
     record.save()
+
+    return record
+
+
+@csrf_exempt
+def all_shit(request, ap, member_id):
+    print(request.GET)
+    record = {}
+    if request.method == "GET":
+        if ap == "out":
+            record = view_table(request, member_id)
+        elif ap == "delete":
+            record = delete_record(request, member_id)
+        elif ap == "change":
+            record = change_record(request, member_id)
+    return render(request, '../templates/NIR_UD/AcademicPerfomance.html', record)
