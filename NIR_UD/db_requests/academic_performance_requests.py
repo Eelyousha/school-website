@@ -45,20 +45,21 @@ def view_table(request):
 
 @csrf_exempt
 def change_record(request, member_id):
-    record = AcademicPerformance().objects.get(member_id)
+    record = AcademicPerformance.objects.get(id=member_id)
 
-    record.lesson_date = request.POST.get('new_lesson_date') \
-        if request.POST.get('new_lesson_date') is not None else record.lesson_date
-    record.is_appeared = request.POST.get('new_is_appeared') \
-        if request.POST.get('new_is_appeared') is not None else record.is_appeared
-    record.student_mark = request.POST.get('new_student_mark') \
-        if request.POST.get('new_student_mark') is not None else record.student_mark
-    record.student_id = request.POST.get('new_student_id') \
-        if request.POST.get('new_student_id') is not None else record.student_id
-    record.class_id = request.POST.get('new_class_id') \
-        if request.POST.get('new_class_id') is not None else record.class_id
-    record.subject_id = request.POST.get('new_subject_id') \
-        if request.POST.get('new_subject_id') is not None else record.subject_id
+    print(request.POST)
+    record.lesson_date = request.POST.get('date') \
+        if request.POST.get('date') is not {} else record.lesson_date
+    record.is_appeared = request.POST.get('is_appeared') \
+        if request.POST.get('is_appeared') is not {} else record.is_appeared
+    record.student_mark = request.POST.get('mark') \
+        if request.POST.get('mark') is not {} else record.student_mark
+    record.student_id = request.POST.get('student') \
+        if request.POST.get('student') is not {} else record.student_id
+    record.class_id = request.POST.get('class') \
+        if request.POST.get('class') is not {} else record.class_id
+    record.subject_id = request.POST.get('subject') \
+        if request.POST.get('subject') is not {} else record.subject_id
 
     record.save()
 
@@ -67,12 +68,13 @@ def change_record(request, member_id):
 
 @csrf_exempt
 def all_shit(request, operation, member_id):
-    print(request.GET)
-    if request.method == "GET":
-        if operation == "out":
-            view_table(request, member_id)
-        elif operation == "delete":
-            delete_record(request, member_id)
-        elif operation == "change":
-            change_record(request, member_id)
+    print('dick')
+    print(request)
+    if operation == "out":
+        view_table(request, member_id)
+    elif operation == "delete":
+        delete_record(request, member_id)
+    elif operation == "change":
+        change_record(request, member_id)
+
     return redirect('academic_performance')

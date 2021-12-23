@@ -28,14 +28,14 @@ class Command(BaseCommand):
             students_id = choice(students_ids)
             classes_id = choice(classes_ids)
             answers.append(AcademicPerformance(
-                lesson_date='.'.join([str(fake.random_int(min=1, max=32)),
-                                      str(fake.random_int(min=1, max=13)),
-                                      str(fake.random_int(min=2020, max=2022))]),
+                lesson_date='-'.join([str(fake.random_int(min=2020, max=2022)),
+                                      str(fake.random_int(min=1, max=12)),
+                                      str(fake.random_int(min=1, max=31))]),
                 is_appeared=fake.pybool(),
                 student_id_id=students_id,
                 class_id_id=classes_id,
                 subject_id_id=subject_id,
-                student_mark=fake.random_int(min=2, max=6)
+                student_mark=fake.random_int(min=2, max=5)
             ))
         AcademicPerformance.objects.bulk_create(answers)
 

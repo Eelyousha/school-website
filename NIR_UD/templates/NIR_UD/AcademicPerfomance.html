@@ -47,7 +47,6 @@
                     </thead>
                     <tbody>
                     {% for el in marks %}
-                        <form method="post">{% csrf_token %}
                             <tr class="success">
                                 <td>{{ el.lesson_date }}</td>
                                 <td>
@@ -74,7 +73,8 @@
                                                         src="../../../src/static/img/Close.svg"
                                                         width="40" alt="">
                                                 </button>
-                                                <form method="post">
+                                                <form method="post" action="{% url 'ap' operation='change' member_id=el.id %}">
+{#                                                {% csrf_token %}#}
                                                     <div class="lesson_date">
                                                         <label>Дата урока</label>
                                                         <input type="date" id="date" name="date"
@@ -82,7 +82,7 @@
                                                     </div>
                                                     <div class="is_appeared">
                                                         <div class="form_radio_btn">
-                                                            <input id="radio-{{ el.id }}" type="radio" name="radio"
+                                                            <input id="radio-{{ el.id }}" type="radio" name="radio1"
                                                                    value="1"
                                                                    checked>
                                                             <label for="radio-{{ el.id }}">
@@ -91,7 +91,7 @@
                                                                     Отсутствовал{% endif %}</label>
                                                         </div>
                                                         <div class="form_radio_btn">
-                                                            <input id="radio-{{ el.id }}-1" type="radio" name="radio"
+                                                            <input id="radio-{{ el.id }}-1" type="radio" name="radio2"
                                                                    value="2">
                                                             <label for="radio-{{ el.id }}-1">
                                                                 {% if el.is_appeared == True %}
@@ -101,7 +101,7 @@
                                                     </div>
                                                     <div class="student_mark">
                                                         <label>Оценка за урок</label>
-                                                        <input type="text" name="is_appeared"
+                                                        <input type="text" name="mark"
                                                                value="{{ el.student_mark }}">
                                                     </div>
                                                     <div class="student">
@@ -126,7 +126,6 @@
                                     </div>
                                 </td>
                             </tr>
-                        </form>
                     {% endfor %}
                     </tbody>
                 </table>

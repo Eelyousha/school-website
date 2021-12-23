@@ -1,6 +1,7 @@
 from django.urls import path, include, re_path
 from . import views
 from .db_requests.academic_performance_requests import all_shit
+from .db_requests.academic_performance_requests import change_record
 from .views import AcademicPerfomance_SearchResultsView
 
 urlpatterns = [
@@ -18,7 +19,7 @@ urlpatterns = [
     re_path('Timetable.html', views.timetable),
     re_path('Homework.html', views.homework),
     re_path('Students.html', views.students),
-    path('ap/<operation>/<member_id>', all_shit, name="ap"),
+    path('ap/<operation>/<member_id>', all_shit, name='ap'),
     path('search/', AcademicPerfomance_SearchResultsView.as_view(), name='search_results'),
 ]
 
