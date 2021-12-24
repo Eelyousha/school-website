@@ -16,7 +16,12 @@
             <a href="{% url 'back' %}"><img src="../../../src/static/img/Vector.svg" alt="">Назад</a>
         </div>
         <div class="head">
-            {% block name %}<p>Успеваемость</p>{% endblock %}
+            {% if error == 'True' %}
+            <body onload="alert('Введённые данные неверны. Запись не будет добавлена.')">
+            <div class="error"><p>Проверьте введённые данные!</p></div>
+            </body>
+        {% endif %}
+            {% block name %}<p class="head_name">Успеваемость</p>{% endblock %}
             <hr>
         </div>
         <div class="table">
@@ -29,9 +34,51 @@
                                 <button type="submit"><img src="../../../src/static/img/Search.svg" alt="">
                                 </button>{% endblock %}
                         </form>
-                        {% block add %}<a href="">Добавить оценку</a>{% endblock %}
+                        {% block add %}<a class="add_button">Добавить оценку</a>{% endblock %}
                     </div>
-                </div> {% endblock %}
+                </div>
+                <div class="modal" id="modal-add">
+                    <div class="modal__content">
+                        <button class="modal__close-button"><img
+                                src="../../../src/static/img/Close.svg"
+                                width="40" alt="">
+                        </button>
+                        <form method="post" action="{% url 'ap' operation='add' member_id=1 %}">
+                            <div class="lesson_date">
+                                <label>Дата урока</label>
+                                <input type="date" id="date" name="date">
+                            </div>
+                            <div class="is_appeared">
+                                <div class="form_radio_btn">
+                                    <input id="radio_1" type="radio" name="radio" value="true" checked>
+                                    <label for="radio_1">Присутствовал</label>
+                                </div>
+                                <div class="form_radio_btn">
+                                    <input id="radio_2" type="radio" name="radio" value="false">
+                                    <label for="radio_2">Отсутствовал</label>
+                                </div>
+                            </div>
+                            <div class="student_mark">
+                                <label>Оценка за урок</label>
+                                <input type="text" name="mark">
+                            </div>
+                            <div class="student">
+                                <label>Ученик</label>
+                                <input type="text" name="student">
+                            </div>
+                            <div class="subject">
+                                <label>Учебный предмет</label>
+                                <input type="text" name="subject">
+                            </div>
+                            <div class="class">
+                                <label>Класс</label>
+                                <input type="text" name="class">
+                            </div>
+                            <button class="done" type="submit">Добавить</button>
+                        </form>
+                    </div>
+                </div>
+            {% endblock %}
             {% block table %}
                 <table id="mytable">
                     <thead>
@@ -47,85 +94,87 @@
                     </thead>
                     <tbody>
                     {% for el in marks %}
-                            <tr class="success">
-                                <td>{{ el.lesson_date }}</td>
-                                <td>
-                                    <button class="o">{{ el.is_appeared }}</button>
-                                </td>
-                                <td>
-                                    <button class="i">{{ el.student_mark }}</button>
-                                </td>
-                                <td>{{ el.student_id.name }}</td>
-                                <td>{{ el.subject_id.name }}</td>
-                                <td>{{ el.class_id.class_id }}</td>
-                                <td>
-                                    <div class="dropdown"><img src="../../../src/static/img/More.svg" alt="">
-                                        <div class="dropdown-content">
-                                            <div class="header__inner">
-                                                <a class="callback" id="{{ el.id }}">Изменить</a>
-                                                <hr>
-                                                <a href="{% url 'ap' operation="delete" member_id=el.id %}">Удалить</a>
-                                            </div>
-                                        </div>
-                                        <div class="modal" id="modal-{{ el.id }}">
-                                            <div class="modal__content">
-                                                <button class="modal__close-button"><img
-                                                        src="../../../src/static/img/Close.svg"
-                                                        width="40" alt="">
-                                                </button>
-                                                <form method="post" action="{% url 'ap' operation='change' member_id=el.id %}">
-{#                                                {% csrf_token %}#}
-                                                    <div class="lesson_date">
-                                                        <label>Дата урока</label>
-                                                        <input type="date" id="date" name="date"
-                                                               value="{{ el.lesson_date }}">
-                                                    </div>
-                                                    <div class="is_appeared">
-                                                        <div class="form_radio_btn">
-                                                            <input id="radio-{{ el.id }}" type="radio" name="radio1"
-                                                                   value="1"
-                                                                   checked>
-                                                            <label for="radio-{{ el.id }}">
-                                                                {% if el.is_appeared == True %}
-                                                                    Присутствовал{% elif el.is_appeared == False %}
-                                                                    Отсутствовал{% endif %}</label>
-                                                        </div>
-                                                        <div class="form_radio_btn">
-                                                            <input id="radio-{{ el.id }}-1" type="radio" name="radio2"
-                                                                   value="2">
-                                                            <label for="radio-{{ el.id }}-1">
-                                                                {% if el.is_appeared == True %}
-                                                                    Отсутствовал{% elif el.is_appeared == False %}
-                                                                    Присутствовал{% endif %}</label>
-                                                        </div>
-                                                    </div>
-                                                    <div class="student_mark">
-                                                        <label>Оценка за урок</label>
-                                                        <input type="text" name="mark"
-                                                               value="{{ el.student_mark }}">
-                                                    </div>
-                                                    <div class="student">
-                                                        <label>Ученик</label>
-                                                        <input type="text" name="student"
-                                                                                value="{{ el.student_id.name }}">
-                                                    </div>
-                                                    <div class="subject">
-                                                        <label>Учебный предмет</label>
-                                                        <input type="text" name="subject"
-                                                                                value="{{ el.subject_id.name }}">
-                                                    </div>
-                                                    <div class="class">
-                                                        <label>Класс</label>
-                                                        <input type="text" name="class"
-                                                                                value="{{ el.class_id.class_id }}">
-                                                    </div>
-                                                    <button class="done" type="submit">Изменить</button>
-                                                </form>
-                                            </div>
+                        <tr class="success">
+                            <td>{{ el.lesson_date }}</td>
+                            <td>
+                                <button class="o">{{ el.is_appeared }}</button>
+                            </td>
+                            <td>
+                                <button class="i">{{ el.student_mark }}</button>
+                            </td>
+                            <td>{{ el.student_id.name }}</td>
+                            <td>{{ el.subject_id.name }}</td>
+                            <td>{{ el.class_id.class_id }}</td>
+                            <td>
+                                <div class="dropdown"><img src="../../../src/static/img/More.svg" alt="">
+                                    <div class="dropdown-content">
+                                        <div class="header__inner">
+                                            <a class="callback" id="{{ el.id }}">Изменить</a>
+                                            <hr>
+                                            <a href="{% url 'ap' operation="delete" member_id=el.id %}">Удалить</a>
                                         </div>
                                     </div>
-                                </td>
-                            </tr>
+                                    <div class="modal" id="modal-{{ el.id }}">
+                                        <div class="modal__content">
+                                            <button class="modal__close-button"><img
+                                                    src="../../../src/static/img/Close.svg"
+                                                    width="40" alt="">
+                                            </button>
+                                            <form method="post"
+                                                  action="{% url 'ap' operation='change' member_id=el.id %}">
+                                                {#{% csrf_token %}#}
+                                                <div class="lesson_date">
+                                                    <label>Дата урока</label>
+                                                    <input type="date" id="date" name="date"
+                                                           value="{{ el.lesson_date }}">
+                                                </div>
+                                                <div class="is_appeared">
+                                                    <div class="form_radio_btn">
+                                                        <input id="radio-{{ el.id }}" type="radio" name="radio"
+                                                               value="{{ el.is_appeared }}" checked>
+                                                        <label for="radio-{{ el.id }}">
+                                                            {% if el.is_appeared == True %}
+                                                                Присутствовал{% elif el.is_appeared == False %}
+                                                                Отсутствовал{% endif %}</label>
+                                                    </div>
+                                                    <div class="form_radio_btn">
+                                                        <input id="radio-{{ el.id }}-1" type="radio" name="radio"
+                                                               value="{{ el.is_appeared }}-1">
+                                                        <label for="radio-{{ el.id }}-1">
+                                                            {% if el.is_appeared == True %}
+                                                                Отсутствовал{% elif el.is_appeared == False %}
+                                                                Присутствовал{% endif %}</label>
+                                                    </div>
+                                                    <input id="hidden-{{ el.id }}" class="hidden" type="hidden"
+                                                           name="is_appeared_{{ el.id }}" value="">
+                                                </div>
+                                                <div class="student_mark">
+                                                    <label>Оценка за урок</label>
+                                                    <input type="text" name="mark"
+                                                           value="{{ el.student_mark }}">
+                                                </div>
+                                                <div class="student">
+                                                    <label>Ученик</label>
+                                                    <input type="text" name="student"
+                                                           value="{{ el.student_id.name }}">
+                                                </div>
+                                                <div class="subject">
+                                                    <label>Учебный предмет</label>
+                                                    <input type="text" name="subject"
+                                                           value="{{ el.subject_id.name }}">
+                                                </div>
+                                                <div class="class">
+                                                    <label>Класс</label>
+                                                    <input type="text" name="class"
+                                                           value="{{ el.class_id.class_id }}">
+                                                </div>
+                                                <button class="done" type="submit">Изменить</button>
+                                            </form>
+                                        </div>
+                                    </div>
+                                </div>
+                            </td>
+                        </tr>
                     {% endfor %}
                     </tbody>
                 </table>
@@ -134,23 +183,75 @@
             </div>
         </div>
     </div>
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-    <script>
-        $(function () {
-            $('.callback').click(function () {
-                var elem = 'modal-' + (this).getAttribute("id");
-                $(document.getElementById(elem)).addClass('modal_active');
-                $('.dropdown-content').css('display', 'none');
+
+    {% block script %}
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+        <script>$(function () {
+            $('.add_button').click(function () {
+                $('#modal-add').addClass('modal_active');
             });
 
             $('.modal__close-button').click(function () {
-                var elem = 'modal-' + (this).getAttribute("id");
-                $(document.getElementById(elem)).addClass('modal_active');
-                $('.dropdown-content').css('display', 'none');
+                $('.modal').removeClass('modal_active');
+                $('.dropdown-content').css('display', '');
             });
         });
-    </script>
-    {% block script %}
+        </script>
+        {#  Вызов модального окна по клику на кнопку "изменить", изменение значения скрытого поля для отправки булевского значения присутствия #}
+        <script>
+            $(function () {
+                $('.callback').click(function () {
+                    var elem = 'modal-' + (this).getAttribute("id");
+                    $(document.getElementById(elem)).addClass('modal_active');
+                    $('.dropdown-content').css('display', 'none');
+                    var id = (this).getAttribute("id");
+                    console.log(id)
+                    radio = 'radio-' + id
+                    console.log(radio)
+                    var radio1 = document.getElementById(radio)
+                    radio2 = radio + '-1'
+                    console.log(radio2)
+                    var radio3 = document.getElementById(radio2)
+                    $('.form_radio_btn input').click(function () {
+                        hidden_object_id = 'hidden-' + id
+                        var b = document.getElementById(hidden_object_id)
+                        console.log(b)
+                        if (radio1.checked) {
+                            var value = document.getElementById(radio).value;
+                            console.log(value)
+                            if (value == "True" || value == "False-1") {
+                                var boolean = true;
+                                b.setAttribute('value', boolean)
+                                console.log(b)
+                            } else if (value == "False" || value == "True-1") {
+                                boolean = false;
+                                b.setAttribute('value', boolean)
+                                console.log(b)
+                            }
+                        } else if (radio3.checked) {
+                            console.log('Правая кнопка выделена', radio2)
+                            value = document.getElementById(radio2).value;
+                            console.log(value)
+                            if (value == "True" || value == "False-1") {
+                                var boolean = true;
+                                b.setAttribute('value', boolean)
+                                console.log(b)
+                            } else if (value == "False" || value == "True-1") {
+                                boolean = false;
+                                b.setAttribute('value', boolean)
+                                console.log(b)
+                            }
+                        }
+                    });
+                });
+
+                $('.modal__close-button').click(function () {
+                    $('.modal').removeClass('modal_active');
+                    $('.dropdown-content').css('display', '');
+                });
+            });
+        </script>
+        {#  Выделение цветом значений оценок  #}
         <script>$('#mytable tr td button.i').each(function () {
             var cellValue = $(this).html();
             if (!isNaN(parseFloat(cellValue))) {
@@ -195,7 +296,9 @@
                 }
             }
         });
+
         </script>
+        {#  Выделение цветом значений присутствия  #}
         <script>$('#mytable tr td button.o').each(function () {
             var cellVal = $(this).html();
             {

@@ -55,22 +55,38 @@ def change_record(request, member_id):
     request_subject = request.POST.get('subject')
 
     print(request.POST)
-    print(type(record.class_id))
+    print(type(record.class_id_id))
+    print(record.class_id_id)
+    print(Students.objects.filter(name=request_student))
+
     record.lesson_date = request_date
 
-    record.is_appeared = True
+    if request_presence == "true":
+        record.is_appeared = True
+    elif request_presence == "false":
+        record.is_appeared = False
 
     record.student_mark = int(request_mark) if request_mark.isdigit() and 1 < int(request_mark) < 6 else record.student_mark
 
-    record.student_id = request_student if Students.objects.filter(student_id=request_student).exists() else record.student_id
+    if Students.objects.filter(name=request_student).exists():
+        student_name = Students.objects.get(name=request_student)
+        student_name_id = student_name.id
+        record.student_id_id = student_name_id
 
-    record.class_id = request_class if Classes.objects.filter(class_id=request_class).exist() else record.class_id
+    if Classes.objects.filter(class_id=request_class).exists():
+        class_name = Classes.objects.get(class_id=request_class)
+        class_class_id = class_name.id
+        record.class_id_id = class_class_id
 
-    record.subject_id = request_subject if AcademicSubjects.objects.filter(subject_id=request_subject).exists() else record.subject_id
+    if AcademicSubjects.objects.filter(name=request_subject).exists():
+        subject_name = AcademicSubjects.objects.get(name=request_subject)
+        subject_name_id = subject_name.id
+        record.subject_id_id = subject_name_id
 
     record.save()
 
-    return record
+    # return record
+    redirect('academic_performance')
 
 
 @csrf_exempt
