@@ -10,6 +10,7 @@ urlpatterns = [
     re_path('^NIR_UD/$', views.auth, name='namespace'),
     re_path('all_tables', views.back, name='back'),
     re_path('Analytic.html', views.analytic, name='analytics'),
+    path('academicperfomance/<error>', views.academic_performance, name='invalid_fill_ap'),
     path('academicperfomance', views.academic_performance, name='academic_performance'),
     re_path('AcademicSubjects.html', views.academic_subjects),
     re_path('AverageScore.html', views.average_score),
