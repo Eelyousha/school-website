@@ -3,56 +3,60 @@
 {% block title %}Результаты поиска{% endblock %}
 
 {% block css %}
-<link rel="stylesheet" href="../../../src/static/css/base.css">
+    <link rel="stylesheet" href="../../../src/static/css/base.css">
 {% endblock %}
 
 {% block name %}<p>Результат поиска</p>{% endblock %}
 
 {% block head %}
-{% block search %} {% endblock %}
+    {% block search %} {% endblock %}
 {% endblock %}
 
 {% block add %} {% endblock %}
 
 {% block table %}
-        <table id="mytable">
-            <thead>
-            <tr>
-                <th>Дата урока</th>
-                <th>Присутствие</th>
-                <th>Оценка за урок</th>
-                <th>Ученик</th>
-                <th>Учебный предмет</th>
-                <th>Класс</th>
-                <th><img src="../../../src/static/img/More.svg" alt=""></th>
-            </tr>
-            </thead>
-            <tbody>
-            {% for i in object_list %}
-                <form method="post">{% csrf_token %}
-                    <tr class="success">
-                        <td>{{ i.lesson_date }}</td>
-                        <td>
-                            <button class="o">{{ i.is_appeared }}</button>
-                        </td>
-                        <td>
-                            <button class="i">{{ i.student_mark }}</button>
-                        </td>
-                        <td>{{ i.student_id.name }}</td>
-                        <td>{{ i.subject_id.name }}</td>
-                        <td>{{ i.class_id.class_id }}</td>
-                        <td>
-                            <div class="dropdown"><img src="../../../src/static/img/More.svg" alt="">
-                                <div class="dropdown-content">
-                                    <a href="{% url "all_shit/" ap="change" member_id="{{ el.id }}"%}">Изменить</a>
-                                    <hr>
-                                    <a href="{% url "all_shit/" ap="delete" member_id="{{ el.id }}"%}">Удалить</a>
+    <table id="mytable">
+        <thead>
+        <tr>
+            <th>Дата урока</th>
+            <th>Присутствие</th>
+            <th>Оценка за урок</th>
+            <th>Ученик</th>
+            <th>Учебный предмет</th>
+            <th>Класс</th>
+            <th><img src="../../../src/static/img/More.svg" alt=""></th>
+        </tr>
+        </thead>
+        <tbody>
+        {% for i in object_list %}
+            <form method="post">{% csrf_token %}
+                <tr class="success">
+                    <td>{{ i.lesson_date }}</td>
+                    <td>
+                        <button class="o">{{ i.is_appeared }}</button>
+                    </td>
+                    <td>
+                        <button class="i">{{ i.student_mark }}</button>
+                    </td>
+                    <td>{{ i.student_id.name }}</td>
+                    <td>{{ i.subject_id.name }}</td>
+                    <td>{{ i.class_id.class_id }}</td>
+                    <td>
+                        <div class="dropdown"><img src="../../../src/static/img/More.svg" alt="">
+                            <div class="dropdown-content">
+                                <div class="container-form">
+                                    <div class="toggle-button">
+                                        <a href="{% url 'ap' operation="change" member_id=i.id %}">Изменить</a>
+                                    </div>
                                 </div>
+                                <hr>
+                                <a href="{% url 'ap' operation="delete" member_id=i.id %}">Удалить</a>
                             </div>
-                        </td>
-                    </tr>
-                </form>
-            {% endfor %}
-            </tbody>
-        </table>
-        {% endblock %}
+                        </div>
+                    </td>
+                </tr>
+            </form>
+        {% endfor %}
+        </tbody>
+    </table>
+{% endblock %}

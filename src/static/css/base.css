@@ -25,7 +25,17 @@ body {
     margin-top: 40px;
 }
 
-.head p {
+.error {
+    font-family: 'Inter', sans-serif;
+    color: #D30000;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    font-size: 14px;
+    font-weight: 600;
+    margin: 0;
+}
+
+.head_name {
     font-family: 'Inter', sans-serif;
     color: #6E6893;
     text-transform: uppercase;
@@ -87,6 +97,7 @@ body {
     padding: 10px;
     margin: 15px 0px 15px;
     border-radius: 6px;
+    cursor: pointer;
 }
 
 .head hr {
@@ -148,7 +159,7 @@ th:nth-child(2) {
 
 th:nth-child(3) {
     color: #6E6893;
-    width: 310px;
+    width: 325px;
     letter-spacing: 0.05em;
     text-transform: uppercase;
     text-align: left;
@@ -210,7 +221,8 @@ th:nth-child(8) {
 }
 
 .success td:first-child {
-    padding: 20px 65px 20px 20px;
+    padding: 20px 45px 20px 20px;
+    width: 250px;
 }
 
 .success td:nth-child(3) {
@@ -238,6 +250,7 @@ th:nth-child(8) {
     width: 150px;
     padding: 20px 20px 20px 20px;
     text-align: right;
+    cursor: pointer;
 }
 
 .footer-table {
@@ -249,6 +262,7 @@ th:nth-child(8) {
 .table {
     box-shadow: 0px 0px 5px rgba(0, 0, 0, 0.2);
     border-radius: 8px;
+    margin-bottom: 70px;
 }
 
 
@@ -257,10 +271,11 @@ th:nth-child(8) {
     position: absolute;
     background-color: white;
     min-width: 130px;
-    box-shadow: 0px 5px 15px rgba(0, 0, 0, 0.2);
+    box-shadow: 0px 3px 5px rgba(0, 0, 0, 0.15);
     z-index: 1;
     border-radius: 6px;
     padding: 5px;
+    pointer: cursor;
 }
 
 /* Links inside the dropdown */
@@ -270,6 +285,7 @@ th:nth-child(8) {
     text-decoration: none;
     display: block;
     text-align: left;
+    cursor: pointer;
 }
 
 .dropdown-content a:nth-child(3) {
@@ -291,3 +307,272 @@ th:nth-child(8) {
 .dropdown:hover .dropdown {
     background-color: #3e8e41;
 }
+
+.modal {
+  position: absolute;
+  visibility: hidden;
+  opacity: 0;
+  transition: .3s;
+  top: -1000px;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  z-index: 1000;
+  background: rgba(0, 0, 0, 0.15);
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+  overflow-y: scroll;
+  padding: 60px 15px;
+}
+
+.modal_active {
+  position: fixed;
+  top: 0;
+  visibility: visible;
+  opacity: 1;
+  transition: .3s;
+}
+
+.modal__content {
+  width: 100%;
+  max-width: 300px;
+  padding: 50px 40px 50px 40px;
+  background: #Ffffff;
+  border-radius: 6px;
+  position: relative;
+  box-shadow: 0px 5px 15px rgba(0, 0, 0, 0.1);
+}
+
+.modal__close-button {
+  background: #ff0000;
+  height: 50px;
+  width: 50px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border: none;
+  position: absolute;
+  right: -20px;
+  top: -20px;
+  background: none;
+  cursor: pointer;
+  transition: .3s;
+  outline: none;
+}
+
+.modal__close-button:hover {
+  transition: .3s;
+  transform: rotate(180deg);
+}
+
+.modal__content form {
+    display: flex;
+    flex-wrap: wrap;
+}
+
+.lesson_date {
+    text-align: left;
+    width: 100%;
+    margin-bottom: 25px;
+}
+
+.lesson_date label {
+    color: #90959E;
+    font-size: 13px;
+    font-weight: 500;
+}
+
+.lesson_date input {
+    width: 288px;
+    padding: 0px 0px 0px 10px;
+    margin: 0;
+    border: 2px solid #E3E6F3;
+    border-radius: 4px;
+    height: 40px;
+    font-family: 'Inter', sans-serif;
+    margin-top: 8px;
+}
+
+.lesson_date input:focus-visible {
+    border-color: #6D5BD0;
+    outline-offset: 2px;
+    outline: none;
+}
+
+.is_appeared {
+    display: inline-block;
+    text-align: left;
+    width: 100%;
+    margin-bottom: 25px;
+}
+
+
+.student_mark {
+    text-align: left;
+    width: 100%;
+    margin-bottom: 25px;
+}
+
+.student_mark label {
+    color: #90959E;
+    font-size: 13px;
+    font-weight: 500;
+}
+
+.student_mark input {
+    width: 288px;
+    padding: 0px 0px 0px 10px;
+    margin: 0;
+    border: 2px solid #E3E6F3;
+    border-radius: 4px;
+    height: 40px;
+    font-family: 'Inter', sans-serif;
+    margin-top: 8px;
+}
+
+.student_mark input:focus-visible{
+    border-color: #6D5BD0;
+    outline-offset: 2px;
+    outline: none;
+}
+
+.student {
+    margin-bottom: 25px;
+    text-align: left;
+}
+
+.student label {
+    color: #90959E;
+    font-size: 13px;
+    font-weight: 500;
+}
+
+
+.student input {
+    width: 288px;
+    padding: 0px 0px 0px 10px;
+    margin: 0;
+    border: 2px solid #E3E6F3;
+    border-radius: 4px;
+    height: 40px;
+    font-family: 'Inter', sans-serif;
+    margin-top: 8px;
+}
+
+.student input:focus-visible {
+    border-color: #6D5BD0;
+    outline-offset: 2px;
+    outline: none;
+}
+
+.subject {
+    margin-bottom: 25px;
+    text-align: left;
+}
+
+.subject label {
+    color: #90959E;
+    font-size: 13px;
+    font-weight: 500;
+}
+
+.subject input {
+    width: 288px;
+    padding: 0px 0px 0px 10px;
+    margin: 0;
+    border: 2px solid #E3E6F3;
+    border-radius: 4px;
+    height: 40px;
+    font-family: 'Inter', sans-serif;
+    margin-top: 8px;
+}
+
+.subject input:focus-visible {
+    border-color: #6D5BD0;
+    outline-offset: 2px;
+    outline: none;
+}
+
+.class {
+    margin-bottom: 25px;
+    text-align: left;
+}
+
+.class label {
+    color: #90959E;
+    font-size: 13px;
+    font-weight: 500;
+}
+
+.class input {
+    width: 288px;
+    padding: 0px 0px 0px 10px;
+    margin: 0;
+    border: 2px solid #E3E6F3;
+    border-radius: 4px;
+    height: 40px;
+    font-family: 'Inter', sans-serif;
+    margin-top: 8px;
+}
+
+.class input:focus-visible {
+    border-color: #6D5BD0;
+    outline-offset: 2px;
+    outline: none;
+}
+
+.done {
+    width: 100%;
+    height: 60px;
+    background-color: #6D5BD0;
+    color: white;
+    font-family: 'Inter', sans-serif;
+    border: none;
+    border-radius: 4px;
+    font-size: 16px;
+    font-weight: 500;
+    cursor: pointer;
+}
+
+.done:hover {
+    background-color: #584AA8;
+    transition: 0.3s;
+}
+
+
+.form_radio_btn {
+	display: inline-block;
+	justify-content: space-between;
+}
+
+.is_appeared .form_radio_btn:first-child{
+    margin-right: 4px;
+}
+
+.form_radio_btn input[type=radio] {
+	display: none;
+}
+
+.form_radio_btn label {
+	display: inline-block;
+	cursor: pointer;
+	padding: 0px 20px;
+	line-height: 50px;
+	border: 2px solid #E3E6F3;
+	border-radius: 4px;
+    color: #90959E;
+	user-select: none;
+    font-size:14px;
+    font-weight: 500;
+}
+
+.form_radio_btn input[type=radio]:checked + label {
+	background: #F5F3FF;
+    color: #6D5BD0;
+    border: 2px solid #6D5BD0;
+    font-family: 'Inter', sans-serif;
+    transition: 0.3s;
+}
+
+

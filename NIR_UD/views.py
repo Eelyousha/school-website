@@ -33,11 +33,11 @@ def analytic(request):
 
 
 @csrf_exempt
-def academic_performance(request):
+def academic_performance(request, error=False):
     marks = AcademicPerformance.objects.all()
-    # for mark in marks:
-    #     mark.lesson_date = datetime.datetime.fromtimestamp(mark.lesson_date / 1e3)
-    return render(request, 'NIR_UD/AcademicPerfomance.html', {'marks': marks})
+    print('marks1')
+    print(error)
+    return render(request, 'NIR_UD/AcademicPerfomance.html', {'marks': marks, 'error': error})
 
 
 # def classestest(request):
