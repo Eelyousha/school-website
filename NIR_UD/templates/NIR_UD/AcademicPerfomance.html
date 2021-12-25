@@ -16,13 +16,32 @@
             <a href="{% url 'back' %}"><img src="../../../src/static/img/Vector.svg" alt="">Назад</a>
         </div>
         <div class="head">
-            {% if error == 'True' %}
-            <body onload="alert('Введённые данные неверны. Запись не будет добавлена.')">
-            <div class="error"><p>Проверьте введённые данные!</p></div>
-            </body>
-        {% endif %}
-            {% block name %}<p class="head_name">Успеваемость</p>{% endblock %}
-            <hr>
+            <div class="alert">
+                {% if error == 'True' %}
+                    <div class="error">
+                        <div class="color"></div>
+                        <img src="../../../src/static/img/error-svgrepo-com%201.svg" alt="">
+                        <div class="error_about">
+                            <p>Запись не была сохранена</p>
+                            <p>Проверьте введённые данные и повторите попытку.</p>
+                        </div>
+                        <div class="close_alert"><img src="../../../src/static/img/Close_alert.svg" alt="" height="8px"></div>
+                    </div>
+                {% endif %}
+                {% if error == 'False' %}
+                    <div class="success-alert">
+                    <div class="color-success"></div>
+                    <div class="icon"><img src="../../../src/static/img/success-svgrepo-com.svg" alt=""></div>
+                    <div class="success_about">
+                        <p>Успех!</p>
+                        <p>Изменения были сохранены в базе данных.</p>
+                    </div>
+                    <div class="close_alert"><img src="../../../src/static/img/Close_alert.svg" alt="" height="8px"></div>
+                {% endif %}
+                </div>
+                {% block name %}<p class="head_name">Успеваемость</p>{% endblock %}
+                <hr>
+            </div>
         </div>
         <div class="table">
             {% block head %}
@@ -186,6 +205,15 @@
 
     {% block script %}
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+        <script>
+            $(function () {
+                $('.close_alert').click(function () {
+                    $('.error').addClass('error-disable');
+                    $('.success-alert').css('display', 'none')
+                });
+            });
+        </script>
+        {#    Скрипт для модального окна добавления    #}
         <script>$(function () {
             $('.add_button').click(function () {
                 $('#modal-add').addClass('modal_active');

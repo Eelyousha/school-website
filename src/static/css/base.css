@@ -26,13 +26,104 @@ body {
 }
 
 .error {
+    display: flex;
+    align-items: center;
+    justify-content: left;
+    background-color: white;
+    height: 60px;
+    box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.15);
+    border-radius: 8px;
+    position: relative;
+    margin-bottom: 30px;
+}
+
+.error-disable {
+    display: none;
+}
+
+.color {
+    background-color: #D30000;
+    height: 45px;
+    width: 4px;
+    border-radius: 100px;
+    margin: 0px 13px 0px 7px;
+}
+
+.error img {
+    margin-right: 14px;
+}
+
+.error p {
     font-family: 'Inter', sans-serif;
-    color: #D30000;
-    text-transform: uppercase;
-    letter-spacing: 0.05em;
-    font-size: 14px;
+}
+
+.error p:first-child {
+    color: #25213B;
+    font-size: 13px;
     font-weight: 600;
-    margin: 0;
+    margin: 0px 0px 2px 0px;
+}
+
+.error p:nth-child(2) {
+    color: #90959E;
+    font-size: 11px;
+    font-weight: 500;
+    margin: 0px;
+}
+
+.close_alert {
+    position: absolute;
+    right: 0;
+    cursor: pointer;
+    padding-right: 5px;
+}
+
+.success-alert {
+    display: flex;
+    align-items: center;
+    justify-content: left;
+    background-color: white;
+    height: 60px;
+    box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.15);
+    border-radius: 8px;
+    position: relative;
+    margin-bottom: 30px;
+}
+
+.color-success {
+    background-color: #007F00;
+    height: 45px;
+    width: 4px;
+    border-radius: 100px;
+    margin: 0px 13px 0px 7px;
+}
+
+.success-alert img {
+    margin-right: 14px;
+}
+
+.icon img{
+    height: 24px;
+    width: 24px;
+    color: #007F00;
+}
+
+.success-alert p {
+    font-family: 'Inter', sans-serif;
+}
+
+.success-alert p:first-child {
+    color: #25213B;
+    font-size: 13px;
+    font-weight: 600;
+    margin: 0px 0px 2px 0px;
+}
+
+.success-alert p:nth-child(2) {
+    color: #90959E;
+    font-size: 11px;
+    font-weight: 500;
+    margin: 0px;
 }
 
 .head_name {
@@ -276,6 +367,21 @@ th:nth-child(8) {
     border-radius: 6px;
     padding: 5px;
     pointer: cursor;
+}
+
+.dropdown-form-hidden {
+    display: none;
+    position: absolute;
+    z-index: 100;
+    box-shadow: 0px 5px 15px rgba(0, 0, 0, 0.2);
+}
+
+.dropdown-form:active .dropdown-form-hidden {
+    display: block;
+}
+
+.dropdown-form-hidden:hover {
+    display: block;
 }
 
 /* Links inside the dropdown */
