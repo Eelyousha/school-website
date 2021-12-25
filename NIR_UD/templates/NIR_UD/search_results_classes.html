@@ -1,58 +1,24 @@
-{% extends 'NIR_UD/AcademicPerfomance.html' %}
+{% extends "NIR_UD/AcademicPerfomance.html" %}
 
-{% block title %}Список классов{% endblock %}
+{% block title %}Результаты поиска{% endblock %}
 
 {% block css %}
-    <link rel="stylesheet" href="../../../src/static/css/classes.css">{% endblock %}
+    <link rel="stylesheet" href="../../../src/static/css/classes.css">
+{% endblock %}
 
-{% block name %}<p class="head_name">Классы</p>{% endblock %}
+{% block name %}<p class="head_name">Результат поиска</p>{% endblock %}
 
 {% block head %}
-    <div class="head-table">
-        <div class="d1">
-            <form action="{% url 'search_class' %}" method="post">
-                {% block search %}
-                    <input name='q' type="text" placeholder="Найти класс по классному руководителю и т.д.">
-                    <button type="submit"><img src="../../../src/static/img/Search.svg" alt="">
-                    </button>{% endblock %}
-            </form>
-            {% block add %}{% if access == True %}<a class="add_button">Добавить класс</a>{% endif %}{% endblock %}
-        </div>
-    </div>
-    <div class="modal" id="modal-add">
-        <div class="modal__content">
-            <button class="modal__close-button"><img
-                    src="../../../src/static/img/Close.svg"
-                    width="40" alt="">
-            </button>
-            <form method="post" action="{% url 'ap' operation='add' member_id=1 %}">
-                <div class="lesson_date">
-                    <label>Класс</label>
-                    <input type="text" name="class_id">
-                </div>
-                <div class="student_amount">
-                    <label>Количество учеников</label>
-                    <input type="text" name="number_of_students">
-                </div>
-                <div class="student_mark">
-                    <label>Профиль обучения</label>
-                    <input type="text" name="training_profile">
-                </div>
-                <div class="student">
-                    <label>Классный руководитель</label>
-                    <input type="text" name="teacher_id">
-                </div>
-                <button class="done" type="submit">Добавить</button>
-            </form>
-        </div>
-    </div>
+    {% block search %} {% endblock %}
 {% endblock %}
+
+{% block add %} {% endblock %}
 
 {% block table %}
     <table id="mytable">
         <thead>
         <tr>
-            <th>Класс</th>
+           <th>Класс</th>
             <th>Количество учеников</th>
             <th>Профиль обучения</th>
             <th>Классный руководитель</th>
@@ -60,51 +26,51 @@
         </tr>
         </thead>
         <tbody>
-        {% for el in classes %}
+        {% for a in object_list %}
             <tr class="success">
-                <td>{{ el.class_id }}</td>
+                <td>{{ a.class_id }}</td>
                 <td>
-                    {{ el.number_of_students }}
+                    {{ a.number_of_students }}
                 </td>
                 <td>
-                    <button class="i">{{ el.training_profile }}</button>
+                    <button class="i">{{ a.training_profile }}</button>
                 </td>
-                <td>{{ el.teacher_id.name }}</td>
+                <td>{{ a.teacher_id.name }}</td>
                 <td>
                     {% if access == True %}
                         <div class="dropdown"><img src="../../../src/static/img/More.svg" alt="">
                         <div class="dropdown-content">
                             <div class="header__inner">
-                                <a class="callback" id="{{ el.id }}">Изменить</a>
+                                <a class="callback" id="{{ a.id }}">Изменить</a>
                                 <hr>
-                                <a href="{% url 'ap' operation="delete" member_id=el.id %}">Удалить</a>
+                                <a href="">Удалить</a>
                             </div>
                         </div>
                     {% endif %}
-                    <div class="modal" id="modal-{{ el.id }}">
+                    <div class="modal" id="modal-{{ a.id }}">
                         <div class="modal__content">
                             <button class="modal__close-button"><img
                                     src="../../../src/static/img/Close.svg"
                                     width="40" alt="">
                             </button>
                             <form method="post"
-                                  action="{% url 'ap' operation='change' member_id=el.id %}">
+                                  action="{% url 'search_class' %}">
                                 {#{% csrf_token %}#}
                                 <div class="lesson_date">
                                     <label>Класс</label>
-                                    <input type="text" name="class_id" value="{{ el.class_id }}">
+                                    <input type="text" name="class_id" value="{{ a.class_id }}">
                                 </div>
                                 <div class="student_amount">
                                     <label>Количество учеников</label>
-                                    <input type="text" name="number_of_students" value="{{ el.number_of_students }}">
+                                    <input type="text" name="number_of_students" value="{{ a.number_of_students }}">
                                 </div>
                                 <div class="student_mark">
                                     <label>Профиль обучения</label>
-                                    <input type="text" name="training_profile" value="{{ el.training_profile }}">
+                                    <input type="text" name="training_profile" value="{{ a.training_profile }}">
                                 </div>
                                 <div class="student">
                                     <label>Классный руководитель</label>
-                                    <input type="text" name="teacher_id" value="{{ el.teacher_id.name }}">
+                                    <input type="text" name="teacher_id" value="{{ a.teacher_id.name }}">
                                 </div>
                                 <button class="done" type="submit">Изменить</button>
                             </form>
@@ -118,7 +84,7 @@
     </table>
 {% endblock %}
 
- {% block script %}
+{% block script %}
      <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
      {#    Скрипт для вывода сообщений об ошибках    #}
      <script>
@@ -213,4 +179,3 @@
             });
      </script>
  {% endblock %}
-

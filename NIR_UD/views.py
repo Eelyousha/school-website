@@ -35,14 +35,11 @@ def analytic(request):
 @csrf_exempt
 def academic_performance(request, error=False):
     marks = AcademicPerformance.objects.all()
-
     if (request.user.groups.filter(name=teachers_group)):
         access = True
     else:
         access = False
-
     print(access)
-
     return render(request, 'NIR_UD/AcademicPerfomance.html', {'marks': marks, 'error': error, 'access': access})
 
 
@@ -62,8 +59,14 @@ def average_score(request):
 
 
 @csrf_exempt
-def classes(request):
-    return render(request, 'NIR_UD/Classes.html')
+def classes(request, error=False):
+    classes = Classes.objects.all()
+    if (request.user.groups.filter(name=teachers_group)) | (request.user.groups.filter(name=students_group)):
+        access = False
+    else:
+        access = True
+    print(access)
+    return render(request, 'NIR_UD/Classes.html', {'classes': classes, 'error': error, 'access': access})
 
 
 @csrf_exempt
@@ -123,21 +126,45 @@ def back(request):
 class AcademicPerfomance_SearchResultsView(ListView):
     template_name = 'NIR_UD/search_results_acper.html'
     model = AcademicPerformance
+    from pprint import pprint
+    print(request.POST)
+    print('не мям вообще')
+    query = request.POST.get('q')
+    if query.isdigit():
+        object_list = AcademicPerformance.objects.filter(
+            Q(student_mark=int(query))
+        )
+    else:
+        object_list = AcademicPerformance.objects.filter(
+            Q(lesson_date__icontains=query) | Q(student_id__name__icontains=query) | Q(class_id__class_id__icontains=query) | Q(subject_id__name__startswith=query)
+        )
 
-    def get_queryset(self):  # новый
-        from pprint import pprint
-        print(self.request.GET)
-        query = self.request.GET.get('q')
-        if query.isdigit():
-            object_list = AcademicPerformance.objects.filter(
-                Q(student_mark=int(query))
-            )
-        else:
-            object_list = AcademicPerformance.objects.filter(
-                Q(lesson_date__icontains=query) | Q(student_id__name__icontains=query) | Q(class_id__class_id__icontains=query) | Q(subject_id__name__startswith=query)
-            )
+    access = bool(request.user.groups.filter(name=teachers_group))
+    print(access)
+    return render(request, 'NIR_UD/search_results_acper.html', {'object_list': object_list, 'access': access})
 
-        return object_list
+
+@csrf_exempt
+def get_classes_queryset(request):
+    template_name = 'NIR_UD/search_results_classes.html'
+    model = Classes
+    print(request.POST)
+    print('мям')
+    query = request.POST.get('q')
+    if query.isdigit():
+        object_list = Classes.objects.filter(
+            Q(number_of_students=int(query))
+        )
+    else:
+        object_list = Classes.objects.filter(
+            Q(class_id__icontains=query) | Q(training_profile__icontains=query) | Q(teacher_id__name__icontains=query)
+        )
+
+    access = not ((request.user.groups.filter(name=teachers_group)) | (request.user.groups.filter(name=students_group)))
+
+    print(object_list)
+    print(type(access))
+    return render(request, 'NIR_UD/search_results_classes.html', {'object_list': object_list, 'access': access})
 
 
 # Права доступа к таблице средних баллов

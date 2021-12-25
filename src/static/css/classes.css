@@ -235,13 +235,13 @@ th:first-child {
     padding: 13px 25px 12px 20px;
     letter-spacing: 0.05em;
     text-transform: uppercase;
-    width: 180px;
+    width: 80px;
     text-align: left;
 }
 
 th:nth-child(2) {
     color: #6E6893;
-    width: 200px;
+    width: 240px;
     padding-right: 30px;
     letter-spacing: 0.05em;
     text-transform: uppercase;
@@ -313,12 +313,12 @@ th:nth-child(8) {
 
 .success td:first-child {
     padding: 20px 45px 20px 20px;
-    width: 250px;
+    width: 80px;
 }
 
 .success td:nth-child(3) {
     padding-left: 34px;
-    text-align: center;
+    text-align: left;
 }
 
 .success td:nth-child(4) {
@@ -544,7 +544,7 @@ th:nth-child(8) {
 }
 
 .student {
-    margin-bottom: 25px;
+    margin-bottom: 30px;
     text-align: left;
 }
 
@@ -572,18 +572,18 @@ th:nth-child(8) {
     outline: none;
 }
 
-.subject {
+.student_amount {
     margin-bottom: 25px;
     text-align: left;
 }
 
-.subject label {
+.student_amount label {
     color: #90959E;
     font-size: 13px;
     font-weight: 500;
 }
 
-.subject input {
+.student_amount input {
     width: 288px;
     padding: 0px 0px 0px 10px;
     margin: 0;
@@ -594,35 +594,7 @@ th:nth-child(8) {
     margin-top: 8px;
 }
 
-.subject input:focus-visible {
-    border-color: #6D5BD0;
-    outline-offset: 2px;
-    outline: none;
-}
-
-.class {
-    margin-bottom: 25px;
-    text-align: left;
-}
-
-.class label {
-    color: #90959E;
-    font-size: 13px;
-    font-weight: 500;
-}
-
-.class input {
-    width: 288px;
-    padding: 0px 0px 0px 10px;
-    margin: 0;
-    border: 2px solid #E3E6F3;
-    border-radius: 4px;
-    height: 40px;
-    font-family: 'Inter', sans-serif;
-    margin-top: 8px;
-}
-
-.class input:focus-visible {
+.student_amount input:focus-visible {
     border-color: #6D5BD0;
     outline-offset: 2px;
     outline: none;
@@ -646,39 +618,5 @@ th:nth-child(8) {
     transition: 0.3s;
 }
 
-
-.form_radio_btn {
-	display: inline-block;
-	justify-content: space-between;
-}
-
-.is_appeared .form_radio_btn:first-child{
-    margin-right: 4px;
-}
-
-.form_radio_btn input[type=radio] {
-	display: none;
-}
-
-.form_radio_btn label {
-	display: inline-block;
-	cursor: pointer;
-	padding: 0px 20px;
-	line-height: 50px;
-	border: 2px solid #E3E6F3;
-	border-radius: 4px;
-    color: #90959E;
-	user-select: none;
-    font-size:14px;
-    font-weight: 500;
-}
-
-.form_radio_btn input[type=radio]:checked + label {
-	background: #F5F3FF;
-    color: #6D5BD0;
-    border: 2px solid #6D5BD0;
-    font-family: 'Inter', sans-serif;
-    transition: 0.3s;
-}
 
 

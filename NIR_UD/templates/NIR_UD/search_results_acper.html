@@ -29,33 +29,88 @@
         </thead>
         <tbody>
         {% for i in object_list %}
-            <form method="post">{% csrf_token %}
-                <tr class="success">
-                    <td>{{ i.lesson_date }}</td>
-                    <td>
-                        <button class="o">{{ i.is_appeared }}</button>
-                    </td>
-                    <td>
-                        <button class="i">{{ i.student_mark }}</button>
-                    </td>
-                    <td>{{ i.student_id.name }}</td>
-                    <td>{{ i.subject_id.name }}</td>
-                    <td>{{ i.class_id.class_id }}</td>
-                    <td>
-                        <div class="dropdown"><img src="../../../src/static/img/More.svg" alt="">
-                            <div class="dropdown-content">
-                                <div class="container-form">
-                                    <div class="toggle-button">
-                                        <a href="{% url 'ap' operation="change" member_id=i.id %}">Изменить</a>
+            <tr class="success">
+                            <td>{{ i.lesson_date }}</td>
+                            <td>
+                                <button class="o">{{ i.is_appeared }}</button>
+                            </td>
+                            <td>
+                                <button class="i">{{ i.student_mark }}</button>
+                            </td>
+                            <td>{{ i.student_id.name }}</td>
+                            <td>{{ i.subject_id.name }}</td>
+                            <td>{{ i.class_id.class_id }}</td>
+                            <td>
+                                {% if access == True %}<div class="dropdown"><img src="../../../src/static/img/More.svg" alt="">
+                                    <div class="dropdown-content">
+                                        <div class="header__inner">
+                                            <a class="callback" id="{{ i.id }}">Изменить</a>
+                                            <hr>
+                                            <a href="{% url 'ap' operation="delete" member_id=i.id %}">Удалить</a>
+                                        </div>
+                                    </div>
+                                {% endif %}
+                                    <div class="modal" id="modal-{{ i.id }}">
+                                        <div class="modal__content">
+                                            <button class="modal__close-button"><img
+                                                    src="../../../src/static/img/Close.svg"
+                                                    width="40" alt="">
+                                            </button>
+                                            <form method="post"
+                                                  action="{% url 'ap' operation='change' member_id=i.id %}">
+                                                {#{% csrf_token %}#}
+                                                <div class="lesson_date">
+                                                    <label>Дата урока</label>
+                                                    <input type="date" id="date" name="date"
+                                                           value="{{ i.lesson_date }}">
+                                                </div>
+                                                <div class="is_appeared">
+                                                    <div class="form_radio_btn">
+                                                        <input id="radio-{{ i.id }}" type="radio" name="radio"
+                                                               value="{{ i.is_appeared }}" checked>
+                                                        <label for="radio-{{ i.id }}">
+                                                            {% if i.is_appeared == True %}
+                                                                Присутствовал{% elif i.is_appeared == False %}
+                                                                Отсутствовал{% endif %}</label>
+                                                    </div>
+                                                    <div class="form_radio_btn">
+                                                        <input id="radio-{{ i.id }}-1" type="radio" name="radio"
+                                                               value="{{ i.is_appeared }}-1">
+                                                        <label for="radio-{{ i.id }}-1">
+                                                            {% if i.is_appeared == True %}
+                                                                Отсутствовал{% elif i.is_appeared == False %}
+                                                                Присутствовал{% endif %}</label>
+                                                    </div>
+                                                    <input id="hidden-{{ i.id }}" class="hidden" type="hidden"
+                                                           name="is_appeared_{{ i.id }}" value="">
+                                                </div>
+                                                <div class="student_mark">
+                                                    <label>Оценка за урок</label>
+                                                    <input type="text" name="mark"
+                                                           value="{{ i.student_mark }}">
+                                                </div>
+                                                <div class="student">
+                                                    <label>Ученик</label>
+                                                    <input type="text" name="student"
+                                                           value="{{ i.student_id.name }}">
+                                                </div>
+                                                <div class="subject">
+                                                    <label>Учебный предмет</label>
+                                                    <input type="text" name="subject"
+                                                           value="{{ i.subject_id.name }}">
+                                                </div>
+                                                <div class="class">
+                                                    <label>Класс</label>
+                                                    <input type="text" name="class"
+                                                           value="{{ i.class_id.class_id }}">
+                                                </div>
+                                                <button class="done" type="submit">Изменить</button>
+                                            </form>
+                                        </div>
                                     </div>
                                 </div>
-                                <hr>
-                                <a href="{% url 'ap' operation="delete" member_id=i.id %}">Удалить</a>
-                            </div>
-                        </div>
-                    </td>
-                </tr>
-            </form>
+                            </td>
+                        </tr>
         {% endfor %}
         </tbody>
     </table>
