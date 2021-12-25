@@ -46,7 +46,8 @@
             {% block head %}
                 <div class="head-table">
                     <div class="d1">
-                        <form action="{% url 'search_results' %}" method="get">
+                        <form action="{% url 'search_results' %}" method="post">
+                        {% csrf_token %}
                             {% block search %}
                                 <input name='q' type="text" placeholder="Найти оценку по дате, имени ученика и т.д.">
                                 <button type="submit"><img src="../../../src/static/img/Search.svg" alt="">

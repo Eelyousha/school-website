@@ -123,7 +123,7 @@ def back(request):
         return render(request, 'NIR_UD/admin_tables.html')
 
 
-class AcademicPerfomance_SearchResultsView(ListView):
+def get_acper_queryset(request):  # новый
     template_name = 'NIR_UD/search_results_acper.html'
     model = AcademicPerformance
     from pprint import pprint
