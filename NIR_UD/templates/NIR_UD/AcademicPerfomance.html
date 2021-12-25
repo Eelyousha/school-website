@@ -16,20 +16,19 @@
             <a href="{% url 'back' %}"><img src="../../../src/static/img/Vector.svg" alt="">Назад</a>
         </div>
         <div class="head">
-            <div class="alert">
-                {% if error == 'True' %}
-                    <div class="error">
-                        <div class="color"></div>
-                        <img src="../../../src/static/img/error-svgrepo-com%201.svg" alt="">
-                        <div class="error_about">
-                            <p>Запись не была сохранена</p>
-                            <p>Проверьте введённые данные и повторите попытку.</p>
-                        </div>
-                        <div class="close_alert"><img src="../../../src/static/img/Close_alert.svg" alt="" height="8px"></div>
+            <div class="alert">{% if error == 'True' %}
+                <div class="error">
+                    <div class="color"></div>
+                    <img src="../../../src/static/img/error-svgrepo-com%201.svg" alt="">
+                    <div class="error_about">
+                        <p>Запись не была сохранена</p>
+                        <p>Проверьте введённые данные и повторите попытку.</p>
                     </div>
-                {% endif %}
-                {% if error == 'False' %}
-                    <div class="success-alert">
+                    <div class="close_alert"><img src="../../../src/static/img/Close_alert.svg" alt="" height="8px"></div>
+                </div>
+            {% endif %}
+            {% if error == 'False' %}
+                <div class="success-alert">
                     <div class="color-success"></div>
                     <div class="icon"><img src="../../../src/static/img/success-svgrepo-com.svg" alt=""></div>
                     <div class="success_about">
@@ -37,11 +36,11 @@
                         <p>Изменения были сохранены в базе данных.</p>
                     </div>
                     <div class="close_alert"><img src="../../../src/static/img/Close_alert.svg" alt="" height="8px"></div>
-                {% endif %}
                 </div>
-                {% block name %}<p class="head_name">Успеваемость</p>{% endblock %}
-                <hr>
+            {% endif %}
             </div>
+            {% block name %}<p class="head_name">Успеваемость</p>{% endblock %}
+            <hr>
         </div>
         <div class="table">
             {% block head %}
@@ -53,7 +52,7 @@
                                 <button type="submit"><img src="../../../src/static/img/Search.svg" alt="">
                                 </button>{% endblock %}
                         </form>
-                        {% block add %}<a class="add_button">Добавить оценку</a>{% endblock %}
+                        {% block add %}{% if access == True %}<a class="add_button">Добавить оценку</a>{% endif %}{% endblock %}
                     </div>
                 </div>
                 <div class="modal" id="modal-add">
@@ -125,7 +124,7 @@
                             <td>{{ el.subject_id.name }}</td>
                             <td>{{ el.class_id.class_id }}</td>
                             <td>
-                                <div class="dropdown"><img src="../../../src/static/img/More.svg" alt="">
+                                {% if access == True %}<div class="dropdown"><img src="../../../src/static/img/More.svg" alt="">
                                     <div class="dropdown-content">
                                         <div class="header__inner">
                                             <a class="callback" id="{{ el.id }}">Изменить</a>
@@ -133,6 +132,7 @@
                                             <a href="{% url 'ap' operation="delete" member_id=el.id %}">Удалить</a>
                                         </div>
                                     </div>
+                                {% endif %}
                                     <div class="modal" id="modal-{{ el.id }}">
                                         <div class="modal__content">
                                             <button class="modal__close-button"><img
@@ -202,7 +202,6 @@
             </div>
         </div>
     </div>
-
     {% block script %}
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
         <script>

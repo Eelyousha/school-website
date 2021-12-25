@@ -35,9 +35,15 @@ def analytic(request):
 @csrf_exempt
 def academic_performance(request, error=False):
     marks = AcademicPerformance.objects.all()
-    print('marks1')
-    print(error)
-    return render(request, 'NIR_UD/AcademicPerfomance.html', {'marks': marks, 'error': error})
+
+    if (request.user.groups.filter(name=teachers_group)):
+        access = True
+    else:
+        access = False
+
+    print(access)
+
+    return render(request, 'NIR_UD/AcademicPerfomance.html', {'marks': marks, 'error': error, 'access': access})
 
 
 # def classestest(request):
